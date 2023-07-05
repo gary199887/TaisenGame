@@ -1,8 +1,12 @@
 using UnityEngine;
-
-[System.Serializable]
+using UnityEngine.SceneManagement;
 public class ButtonEvent:MonoBehaviour
 {
+    public static void Start()
+    {
+
+    }
+
     public static void GameEnd()
     {
         //ÉQÅ[ÉÄèIóπ
@@ -13,7 +17,12 @@ public class ButtonEvent:MonoBehaviour
 #endif
     }
 
-    public static void ChangeScene()
+    public static void ChangeScene(string SceneName)
+    {
+        SceneManager.LoadScene(SceneName);
+    }
+
+    public static void BackTitle()
     {
 
     }
