@@ -8,6 +8,7 @@ public class ButtonEvent:MonoBehaviour
     GameObject MenuUIs;
     public void GoMenu()
     {
+
         TitleUIs.SetActive(false);
         MenuUIs.SetActive(true);
     }
