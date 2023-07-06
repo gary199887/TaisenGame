@@ -9,9 +9,10 @@ public class ButtonEvent:MonoBehaviour
     GameObject MenuUIs;
     public void GoMenu()
     {
-
-        TitleUIs.SetActive(false);
-        MenuUIs.SetActive(true);
+        TitleUIs.transform.DOScale(new Vector3(0, 0, 0), 0.3f);
+        MenuUIs.transform.DOScale(new Vector3(1, 1, 1), 0.3f);
+        //TitleUIs.SetActive(false);
+        //MenuUIs.SetActive(true);
     }
 
     public static void GameEnd()
@@ -31,11 +32,18 @@ public class ButtonEvent:MonoBehaviour
 
     public void BackTitle()
     {
-        MenuUIs.SetActive(false);
-        TitleUIs.SetActive(true);
+
+        MenuUIs.transform.DOScale(new Vector3(0, 0, 0), 0.3f)
+            .OnComplete(() =>
+            {
+                TitleUIs.transform.DOScale(new Vector3(1, 1, 1), 0.3f);
+            }
+        );
     }
     public void NoMethod()
     {
 
     }
+
+    
 }
