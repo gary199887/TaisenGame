@@ -17,12 +17,13 @@ public class ItemDetailUIManager : MonoBehaviour
         cd = 0.5f;
         itemDetail.SetActive(false);
         //仮のアイテムリスト　jsonファイルに一旦セーブするためのもの
-        ItemList testItemList = new ItemList();
-        testItemList.items.Add(new Item(2, "血まみれの酒瓶", "被害者の血痕が付いた酒瓶"));
-        testItemList.items.Add(new Item(1, "ナイフ", "客Aの指紋が付いたナイフ"));
-        testItemList.sortItemList();
-        ItemManager.saveItemList(testItemList);
+        //ItemList testItemList = new ItemList();
+        //testItemList.items.Add(new Item(2, "血まみれの酒瓶", "被害者の血痕が付いた酒瓶"));
+        //testItemList.items.Add(new Item(1, "ナイフ", "客Aの指紋が付いたナイフ"));
+        //testItemList.sortItemList();
+        //ItemManager.saveItemList(testItemList);
         itemList = ItemManager.loadItemList();
+        PlayerController.itemBox = new Item[itemList.items.Count];
     }
 
     private void Update()

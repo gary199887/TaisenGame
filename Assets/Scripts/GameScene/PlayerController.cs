@@ -19,8 +19,8 @@ public class PlayerController : MonoBehaviour
         speed = 10.0f;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        itemBox = new Item[ItemDetailUIManager.itemList.items.Count];
-        Debug.Log(itemBox.Length);
+        //itemBox = new Item[ItemDetailUIManager.itemList.items.Count];
+       // Debug.Log(itemBox.Length);
     }
 
     // Update is called once per frame
@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Item")) {
             if (Input.GetKeyDown(KeyCode.Z)) {
                 int id = Int32.Parse(other.gameObject.name.Split("_")[1]);
+                other.gameObject.GetComponent<SpriteRenderer>().color = Color.grey;
                 itemDetailUIManager.showItemDetail(id);
                 canMove = false;
             }
