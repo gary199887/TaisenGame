@@ -6,7 +6,6 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     float speed;
-    Color playerColor;
     Animator animator;
     SpriteRenderer spriteRenderer;
     public static bool canMove;
@@ -19,8 +18,6 @@ public class PlayerController : MonoBehaviour
         speed = 10.0f;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        //itemBox = new Item[ItemDetailUIManager.itemList.items.Count];
-       // Debug.Log(itemBox.Length);
     }
 
     // Update is called once per frame
@@ -33,14 +30,23 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (!canMove) return;
         if (other.gameObject.CompareTag("Item")) {
             animator.SetTrigger("FoundItem");
             spriteRenderer.color = Color.red;
             if (Input.GetKeyDown(KeyCode.Z))
             {
                 int id = Int32.Parse(other.gameObject.name.Split("_")[1]);
-                itemDetailUIManager.showItemDetail(id);
-                canMove = false;
+                itemDetailUIManager.showItemDetail(id);            }
+        }
+
+        if (other.gameObject.CompareTag("Button"))
+        {
+            animator.SetTrigger("FoundItem");
+            spriteRenderer.color = Color.red;
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                other.gameObject.GetComponent<Button>().onClicked();
             }
         }
     }
@@ -48,18 +54,26 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
+        if (!canMove) return;
         if (other.gameObject.CompareTag("Item")) {
             if (Input.GetKeyDown(KeyCode.Z)) {
                 int id = Int32.Parse(other.gameObject.name.Split("_")[1]);
                 other.gameObject.GetComponent<SpriteRenderer>().color = Color.grey;
                 itemDetailUIManager.showItemDetail(id);
-                canMove = false;
+            }
+        }
+
+        if (other.gameObject.CompareTag("Button"))
+        {
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                other.gameObject.GetComponent<Button>().onClicked();
             }
         }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Item"))
+        //if (other.gameObject.CompareTag("Item"))
         {
             animator.SetTrigger("ExitItem");
             spriteRenderer.color = Color.white;
