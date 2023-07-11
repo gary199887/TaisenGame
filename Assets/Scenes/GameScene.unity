@@ -747,7 +747,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &769179871
 Transform:
   m_ObjectHideFlags: 0
@@ -1319,6 +1319,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogSystem
       objectReference: {fileID: 0}
+    - target: {fileID: 6580323843710898805, guid: 23980dd69bbc27c40bfc2789b08ff672, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8598077791122107411, guid: 23980dd69bbc27c40bfc2789b08ff672, type: 3}
+      propertyPath: m_Name
+      value: tialogText
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1585,14 +1593,6 @@ PrefabInstance:
     - target: {fileID: 5314431955027104346, guid: 81306329c464f614d8cedb8c5d757293, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7778557345917570398, guid: 81306329c464f614d8cedb8c5d757293, type: 3}
-      propertyPath: m_Size.x
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7778557345917570398, guid: 81306329c464f614d8cedb8c5d757293, type: 3}
-      propertyPath: m_Size.y
-      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2279,6 +2279,10 @@ PrefabInstance:
     - target: {fileID: 6686941253085845073, guid: c433e9fdfd973b9458c6642dd014de58, type: 3}
       propertyPath: m_Name
       value: ItemDetailUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6686941253085845073, guid: c433e9fdfd973b9458c6642dd014de58, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

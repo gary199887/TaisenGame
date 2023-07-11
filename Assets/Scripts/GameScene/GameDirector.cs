@@ -7,23 +7,26 @@ public class GameDirector : MonoBehaviour
     static int stage;
     public static float gameTime;
     public static string playerName;
+    public static bool gameClear;
     Stage stageData;
     // Start is called before the first frame update
     void Start()
     {
-        stage = 1;  // kari
+        stage = 1;  // kari, would be set when stage selected
+        gameClear = false;
         gameTime = 0;
         playerName = "Unknown";
         stageData = StageManager.loadStage(stage);      // load stage data up to current stage
         setItemList(stageData.itemList);
-        setChara(stageData.charaList);
+        setCharaList(stageData.charaList);
        
     }
 
     // Update is called once per frame
     void Update()
     {
-        gameTime += Time.deltaTime;
+        if(!gameClear)
+            gameTime += Time.deltaTime;
     }
 
     public static string getTimeString() {
@@ -41,7 +44,11 @@ public class GameDirector : MonoBehaviour
         PlayerController.itemBox = new Item[itemList.items.Count];
     }
 
-    public void setChara(List<Chara> charas) {
-        TalkSystemManager.charaList = charas;
+    public void setCharaList(List<Chara> charaList) {
+        TalkSystemManager.charaList = charaList;
+    }
+
+    public static void setPlayerName(string input) {
+        playerName = input;
     }
 }
