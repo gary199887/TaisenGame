@@ -15,7 +15,7 @@ public class ButtonEvent:MonoBehaviour
         //MenuUIs.SetActive(true);
     }
 
-    public static void GameEnd()
+    public void GameEnd()
     {
         //ÉQÅ[ÉÄèIóπ
 #if UNITY_EDITOR
@@ -25,7 +25,7 @@ public class ButtonEvent:MonoBehaviour
 #endif
     }
 
-    public void ChangeScene(string SceneName)
+    public static void ChangeScene(string SceneName)
     {
         SceneManager.LoadScene(SceneName);
     }
