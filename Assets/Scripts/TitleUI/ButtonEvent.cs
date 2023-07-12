@@ -9,10 +9,10 @@ public class ButtonEvent:MonoBehaviour
     GameObject MenuUIs;
     public void GoMenu()
     {
-        TitleUIs.transform.DOScale(new Vector3(0, 0, 0), 0.3f);
-        MenuUIs.transform.DOScale(new Vector3(1, 1, 1), 0.3f);
-        //TitleUIs.SetActive(false);
-        //MenuUIs.SetActive(true);
+        //TitleUIs.transform.DOScale(new Vector3(0, 0, 0), 0.3f);
+        //MenuUIs.transform.DOScale(new Vector3(1, 1, 1), 0.3f);
+        TitleUIs.SetActive(false);
+        MenuUIs.SetActive(true);
     }
 
     public void GameEnd()

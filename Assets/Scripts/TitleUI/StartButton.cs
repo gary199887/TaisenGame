@@ -9,6 +9,7 @@ public class StartButton : MonoBehaviour, Button
     ButtonEvent buttonEvent;
     public void onClicked()
     {
+        Debug.Log("clicked");
         buttonEvent.GoMenu();
     }
 }
