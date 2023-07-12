@@ -9,13 +9,13 @@ public class ButtonEvent:MonoBehaviour
     GameObject MenuUIs;
     public void GoMenu()
     {
-        TitleUIs.transform.DOScale(new Vector3(0, 0, 0), 0.3f);
-        MenuUIs.transform.DOScale(new Vector3(1, 1, 1), 0.3f);
-        //TitleUIs.SetActive(false);
-        //MenuUIs.SetActive(true);
+        //TitleUIs.transform.DOScale(new Vector3(0, 0, 0), 0.3f);
+        //MenuUIs.transform.DOScale(new Vector3(1, 1, 1), 0.3f);
+        TitleUIs.SetActive(false);
+        MenuUIs.SetActive(true);
     }
 
-    public static void GameEnd()
+    public void GameEnd()
     {
         //ÉQÅ[ÉÄèIóπ
 #if UNITY_EDITOR
@@ -25,7 +25,7 @@ public class ButtonEvent:MonoBehaviour
 #endif
     }
 
-    public void ChangeScene(string SceneName)
+    public static void ChangeScene(string SceneName)
     {
         SceneManager.LoadScene(SceneName);
     }
