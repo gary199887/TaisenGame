@@ -133,7 +133,7 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!61 &7778557345917570398
@@ -179,7 +179,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3075, y: 0.33}
+  m_Size: {x: 0.2, y: 0.2}
   m_EdgeRadius: 0
 --- !u!114 &495589251088440862
 MonoBehaviour:
@@ -193,3 +193,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb37d29f61658424e8be83be924ab8c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemDetailUIManager: {fileID: 0}

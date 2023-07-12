@@ -6,9 +6,9 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     float speed;
-    Animator animator;
+    Animator animator;      
     SpriteRenderer spriteRenderer;
-    public static bool canMove;
+    public static bool canMove;             // bool to check whether player can do any action(whether it is in detect part)
     public ItemDetailUIManager itemDetailUIManager;
     public static Item[] itemBox;
     // Start is called before the first frame update
@@ -36,14 +36,16 @@ public class PlayerController : MonoBehaviour
             spriteRenderer.color = Color.red;
             if (Input.GetKeyDown(KeyCode.Z))
             {
+                // get item
                 int id = Int32.Parse(other.gameObject.name.Split("_")[1]);
-                itemDetailUIManager.showItemDetail(id);            }
+                other.gameObject.GetComponent<SpriteRenderer>().color = Color.grey;
+                itemDetailUIManager.showItemDetail(id);            
+            }
         }
 
         if (other.gameObject.CompareTag("Button"))
         {
-            animator.SetTrigger("FoundItem");
-            spriteRenderer.color = Color.red;
+            animator.SetTrigger("FoundButton");
             if (Input.GetKeyDown(KeyCode.Z))
             {
                 other.gameObject.GetComponent<Button>().onClicked();
@@ -57,9 +59,10 @@ public class PlayerController : MonoBehaviour
         if (!canMove) return;
         if (other.gameObject.CompareTag("Item")) {
             if (Input.GetKeyDown(KeyCode.Z)) {
-                int id = Int32.Parse(other.gameObject.name.Split("_")[1]);
-                other.gameObject.GetComponent<SpriteRenderer>().color = Color.grey;
-                itemDetailUIManager.showItemDetail(id);
+                // get item
+                int id = Int32.Parse(other.gameObject.name.Split("_")[1]);          // identify items' id with their name after '_' -> "Item_1" get 1
+                other.gameObject.GetComponent<SpriteRenderer>().color = Color.grey; // make item become grey after being gotten
+                itemDetailUIManager.showItemDetail(id);                             // show item detail
             }
         }
 
@@ -67,17 +70,13 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Z))
             {
-                Debug.Log("clicked");
-                other.gameObject.GetComponent<Button>().onClicked();
+                other.gameObject.GetComponent<Button>().onClicked();                // get instanceof "Button" interface and call onClicked() method
             }
         }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        //if (other.gameObject.CompareTag("Item"))
-        {
             animator.SetTrigger("ExitItem");
-            spriteRenderer.color = Color.white;
-        }
+            spriteRenderer.color = Color.white;   
     }
 }
