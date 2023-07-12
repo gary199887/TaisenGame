@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 52846061}
   - component: {fileID: 52846062}
   - component: {fileID: 52846063}
+  - component: {fileID: 52846064}
   m_Layer: 0
   m_Name: BackButton
   m_TagString: Button
@@ -341,6 +342,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.22, y: 0.49}
   m_EdgeRadius: 0
+--- !u!114 &52846064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52846060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0296fdf5c2883144085731d77e7ca4a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonEvent: {fileID: 1031690531}
 --- !u!1 &77151146
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,7 +607,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 272637736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.8990073, y: -1.1112486, z: 0.26594308}
+  m_LocalPosition: {x: 3.6, y: -1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -795,7 +809,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &836949790
 Transform:
   m_ObjectHideFlags: 0
@@ -805,7 +819,7 @@ Transform:
   m_GameObject: {fileID: 836949789}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.8, y: -1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52846061}
@@ -954,6 +968,7 @@ GameObject:
   - component: {fileID: 869869281}
   - component: {fileID: 869869282}
   - component: {fileID: 869869283}
+  - component: {fileID: 869869284}
   m_Layer: 0
   m_Name: Stage2Button
   m_TagString: Button
@@ -1073,6 +1088,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 19.2, y: 10.8}
   m_EdgeRadius: 0
+--- !u!114 &869869284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869869280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce0dd1a3a83024c941933495065109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonEvent: {fileID: 1031690531}
+  sceneName: GameScene
 --- !u!1 &1031690530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1552,6 +1581,7 @@ GameObject:
   - component: {fileID: 1886467401}
   - component: {fileID: 1886467402}
   - component: {fileID: 1886467403}
+  - component: {fileID: 1886467404}
   m_Layer: 0
   m_Name: Stage3Button
   m_TagString: Button
@@ -1671,6 +1701,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 19.2, y: 10.8}
   m_EdgeRadius: 0
+--- !u!114 &1886467404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1886467400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce0dd1a3a83024c941933495065109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonEvent: {fileID: 1031690531}
+  sceneName: GameScene
 --- !u!1 &2000549375
 GameObject:
   m_ObjectHideFlags: 0
@@ -1682,6 +1726,7 @@ GameObject:
   - component: {fileID: 2000549376}
   - component: {fileID: 2000549377}
   - component: {fileID: 2000549378}
+  - component: {fileID: 2000549379}
   m_Layer: 0
   m_Name: Stage1Button
   m_TagString: Button
@@ -1801,3 +1846,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 19.2, y: 10.8}
   m_EdgeRadius: 0
+--- !u!114 &2000549379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000549375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce0dd1a3a83024c941933495065109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonEvent: {fileID: 1031690531}
+  sceneName: GameScene
