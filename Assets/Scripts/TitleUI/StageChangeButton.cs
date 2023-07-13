@@ -6,6 +6,13 @@ public class StageChangeButton : MonoBehaviour,Button
 {
     [SerializeField]
     ButtonEvent buttonEvent;
+
+    enum Mode
+    {
+
+    }
+
+
     [SerializeField]
     string sceneName;
 
