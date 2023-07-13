@@ -28,6 +28,7 @@ public class ItemDetailUIManager : MonoBehaviour
             if(timeCount > cd)
             if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X))
             {
+                timeCount = 0;
                 itemDetail.SetActive(false);
                 PlayerController.canMove = true;
             }

@@ -34,22 +34,11 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Item")) {
             animator.SetTrigger("FoundItem");
             spriteRenderer.color = Color.red;
-            if (Input.GetKeyDown(KeyCode.Z))
-            {
-                // get item
-                int id = Int32.Parse(other.gameObject.name.Split("_")[1]);
-                other.gameObject.GetComponent<SpriteRenderer>().color = Color.grey;
-                itemDetailUIManager.showItemDetail(id);            
-            }
         }
 
         if (other.gameObject.CompareTag("Button"))
         {
             animator.SetTrigger("FoundButton");
-            if (Input.GetKeyDown(KeyCode.Z))
-            {
-                other.gameObject.GetComponent<Button>().onClicked();
-            }
         }
     }
 
