@@ -115,6 +115,7 @@ public class AnswerSystemManager : MonoBehaviour
         {
             // ‘S–â³‰ğ
             Debug.Log("‘S–â³‰ğ");
+            GameDirector.clearGame();
         }
     }
 }

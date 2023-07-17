@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameDirector : MonoBehaviour
 {
-    static int stage;
+    public static int stage;
     public static float gameTime;
     public static string playerName;
     public static bool gameClear;
-    Stage stageData;
+    static Stage stageData;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +36,7 @@ public class GameDirector : MonoBehaviour
 
     public static string getTimeString(float time)
     {
-        return $"{time / 60: 00}:{time % 60: 00}";
+        return $"{time / 60:00}:{time % 60:00}";
     }
 
     public void setItemList(ItemList itemList)
@@ -50,5 +51,19 @@ public class GameDirector : MonoBehaviour
 
     public static void setPlayerName(string input) {
         playerName = input;
+    }
+
+    public static Rank getRank() {
+        return stageData.rank;
+    }
+
+    public static void saveRank(Rank rank) {
+        stageData.rank = rank;
+        StageManager.saveStage(stageData);
+    }
+
+    public static void clearGame() {// would add some actions when clearing game
+        gameClear = true;
+        SceneManager.LoadScene("ResultScene");
     }
 }
