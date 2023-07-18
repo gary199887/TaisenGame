@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-public class Slide : MonoBehaviour,Button
+public class Slide : MonoBehaviour
 { 
     CanvasGroup cvgp;
 
@@ -14,10 +14,7 @@ public class Slide : MonoBehaviour,Button
         cvgp = GetComponent<CanvasGroup>();
     }
 
-    public void onClicked()
-    {
-
-    }
+    
     
     void Out()
     {

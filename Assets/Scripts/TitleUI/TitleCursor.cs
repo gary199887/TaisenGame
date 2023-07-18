@@ -5,18 +5,19 @@ using System;
 
 public class TitleCursor : MonoBehaviour
 {
+    [SerializeField]
     float speed;
     Animator animator;
-    SpriteRenderer spriteRenderer;
+   
     public static bool canMove;             // bool to check whether player can do any action(whether it is in detect part)
-    public static Item[] itemBox;
+    
+
+    
     // Start is called before the first frame update
     void Start()
     {
         canMove = true;
-        speed = 10.0f;
         animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -27,7 +28,14 @@ public class TitleCursor : MonoBehaviour
         transform.Translate(inputDirection * speed * Time.deltaTime);
     }
 
-  
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Button"))
+        {
+            Debug.Log("Fine");
+        }
+    }
 
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -41,10 +49,5 @@ public class TitleCursor : MonoBehaviour
                 other.gameObject.GetComponent<Button>().onClicked();                // get instanceof "Button" interface and call onClicked() method
             }
         }
-    }
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        animator.SetTrigger("ExitItem");
-        spriteRenderer.color = Color.white;
     }
 }
