@@ -10,6 +10,7 @@ public class GameDirector : MonoBehaviour
     public static string playerName;
     public static bool gameClear;
     static Stage stageData;
+    public DialogManager dialogManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,7 @@ public class GameDirector : MonoBehaviour
         stageData = StageManager.loadStage(stage);      // load stage data up to current stage
         setItemList(stageData.itemList);
         setCharaList(stageData.charaList);
-       
+        
     }
 
     // Update is called once per frame
@@ -28,6 +29,9 @@ public class GameDirector : MonoBehaviour
     {
         if(!gameClear)
             gameTime += Time.deltaTime;
+        else
+            if(!dialogManager.dialog.activeSelf)
+            SceneManager.LoadScene("ResultScene");
     }
 
     public static string getTimeString() {
@@ -62,8 +66,9 @@ public class GameDirector : MonoBehaviour
         StageManager.saveStage(stageData);
     }
 
-    public static void clearGame() {// would add some actions when clearing game
+    public void clearGame() {// would add some actions when clearing game
         gameClear = true;
-        SceneManager.LoadScene("ResultScene");
+        string[] endHint = new string[] {"クリアです", "Zキー押してリザルトを確認"};
+        dialogManager.showDialog(endHint);
     }
 }
