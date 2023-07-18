@@ -7,6 +7,10 @@ public class ButtonEvent:MonoBehaviour
     GameObject TitleUIs;
     [SerializeField]
     GameObject MenuUIs;
+
+    public static int stageNum { get; private set; }
+
+    
     public void GoMenu()
     {
         TitleUIs.transform.DOScale(new Vector3(0, 0, 0), 0.3f)
@@ -32,6 +36,13 @@ public class ButtonEvent:MonoBehaviour
     public void ChangeScene(string SceneName)
     {
         SceneManager.LoadScene(SceneName);
+    }
+
+    public void ChangeScene(int number)
+    {
+        stageNum = number;
+        DontDestroyOnLoad(this.gameObject);
+        SceneManager.LoadScene("GameScene");
     }
 
     public void BackTitle()

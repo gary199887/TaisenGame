@@ -9,15 +9,31 @@ public class StageChangeButton : MonoBehaviour,Button
 
     enum Mode
     {
-
+        SceneNameChange,
+        StageNumberChange
     }
 
+    [SerializeField]
+    Mode mode;
 
+    
     [SerializeField]
     string sceneName;
 
+    [SerializeField]
+    int stageNum;
+
     public void onClicked()
     {
-        buttonEvent.ChangeScene(sceneName);
+        if (mode.Equals(Mode.SceneNameChange))
+        {
+            buttonEvent.ChangeScene(sceneName);
+        }
+        else
+        {
+            buttonEvent.ChangeScene(stageNum);
+        }
+
+        
     }
 }
