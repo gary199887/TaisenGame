@@ -115,6 +115,9 @@ public class AnswerSystemManager : MonoBehaviour
         {
             // ‘S–â³‰ğ
             Debug.Log("‘S–â³‰ğ");
+            GameDirector gameDirector = GameObject.Find("GameDirector").GetComponent<GameDirector>();
+            gameDirector.clearGame();
+            answerSystem.SetActive(false);
         }
     }
 }
