@@ -29,25 +29,22 @@ public class TitleCursor : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.CompareTag("Button"))
-        {
-            Debug.Log("Fine");
-        }
-    }
-
     private void OnTriggerStay2D(Collider2D other)
     {
         if (!canMove) return;
 
         if (other.gameObject.CompareTag("Button"))
         {
-            animator.SetTrigger("FoundButton");
+            animator.SetTrigger("OnButtonStay");
             if (Input.GetKey(KeyCode.Z))
             {
                 other.gameObject.GetComponent<Button>().onClicked();                // get instanceof "Button" interface and call onClicked() method
             }
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        animator.SetTrigger("OnButtonExit");
     }
 }
