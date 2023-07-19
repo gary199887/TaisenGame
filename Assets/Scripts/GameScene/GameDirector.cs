@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameDirector : MonoBehaviour
+public class GameDirector : CommonFunctions
 {
-    public static int stage = 1;
+    public static int stage = 2;
     public static float gameTime;
     public static string playerName;
     public static bool gameClear;
@@ -39,6 +39,7 @@ public class GameDirector : MonoBehaviour
         else
             if(!dialogManager.dialog.activeSelf)
             SceneManager.LoadScene("ResultScene");
+        endGame();
     }
 
     public static string getTimeString() {

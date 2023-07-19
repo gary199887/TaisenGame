@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown("Submit")) {
                 // get item
                 int id = Int32.Parse(other.gameObject.name.Split("_")[1]);          // identify items' id with their name after '_' -> "Item_1" get 1
-                other.gameObject.GetComponent<SpriteRenderer>().color = Color.grey; // make item become grey after being gotten
+                other.gameObject.GetComponent<SpriteRenderer>().color = Color.grey + new Color(0, 0, 0, -0.5f); // make item become grey after being gotten
                 itemDetailUIManager.showItemDetail(id);                             // show item detail
             }
         }

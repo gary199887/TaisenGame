@@ -972,6 +972,7 @@ MonoBehaviour:
   dialogManager: {fileID: 1267644731}
   backGroundImages:
   - {fileID: 21300000, guid: 6d815e90080024c48b87d8b9f5387d8a, type: 3}
+  - {fileID: 21300000, guid: 6d815e90080024c48b87d8b9f5387d8a, type: 3}
   backGround: {fileID: 70754149}
   itemPrefab: {fileID: 6297469067418959944, guid: c676b755234145a4d9e7c20213563ef7, type: 3}
 --- !u!1 &746126646
