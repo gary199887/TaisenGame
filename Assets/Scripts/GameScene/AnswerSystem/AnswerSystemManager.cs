@@ -30,7 +30,7 @@ public class AnswerSystemManager : MonoBehaviour
     {
         if (!answerSystem.activeSelf) return;     
 
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetButtonDown("Submit"))
         {
             //button.onClick.Invoke();@   // ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚±‚Æ‚É‚·‚é
         }

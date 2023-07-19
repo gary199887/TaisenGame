@@ -11,6 +11,9 @@ public class GameDirector : MonoBehaviour
     public static bool gameClear;
     static Stage stageData;
     public DialogManager dialogManager;
+    public Sprite[] backGroundImages;
+    public GameObject backGround;
+    public GameObject itemPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +24,12 @@ public class GameDirector : MonoBehaviour
         stageData = StageManager.loadStage(stage);      // load stage data up to current stage
         setItemList(stageData.itemList);
         setCharaList(stageData.charaList);
-        
+        foreach (Item item in stageData.itemList.items)
+        {
+            GameObject createItem = Instantiate(itemPrefab, item.pos, Quaternion.identity);
+            createItem.name = $"Item_{item.id}";
+        }
+        backGround.GetComponent<SpriteRenderer>().sprite = backGroundImages[stage - 1];  // set background image up to current stage number
     }
 
     // Update is called once per frame
@@ -68,7 +76,7 @@ public class GameDirector : MonoBehaviour
 
     public void clearGame() {// would add some actions when clearing game
         gameClear = true;
-        string[] endHint = new string[] {"クリアです", "Zキー押してリザルトを確認"};
+        string[] endHint = stageData.endTalks.ToArray();
         dialogManager.showDialog(endHint);
     }
 }
