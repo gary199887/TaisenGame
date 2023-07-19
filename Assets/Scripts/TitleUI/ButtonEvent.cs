@@ -10,33 +10,7 @@ public class ButtonEvent:MonoBehaviour
 
     public static int stageNum { get; private set; }
 
-    
-    public void GoMenu()
-    {
-        TitleUIs.transform.DOScale(new Vector3(0, 0, 0), 0.3f)
-            .OnComplete(() =>
-            {
-                MenuUIs.transform.DOScale(new Vector3(1, 1, 1), 0.3f);
-            }
-        );
-        //TitleUIs.SetActive(false);
-        //MenuUIs.SetActive(true);
-    }
 
-    public void GameEnd()
-    {
-        //ÉQÅ[ÉÄèIóπ
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
-    }
-
-    public void ChangeScene(string SceneName)
-    {
-        SceneManager.LoadScene(SceneName);
-    }
 
     public void ChangeScene(int number)
     {

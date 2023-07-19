@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StageChangeButton : MonoBehaviour,Button
 {
@@ -27,11 +28,12 @@ public class StageChangeButton : MonoBehaviour,Button
     {
         if (mode.Equals(Mode.SceneNameChange))
         {
-            buttonEvent.ChangeScene(sceneName);
+            SceneManager.LoadScene(sceneName);
         }
         else
         {
-            buttonEvent.ChangeScene(stageNum);
+            GameDirector.stage = stageNum;
+            SceneManager.LoadScene("GameScene");
         }
 
         

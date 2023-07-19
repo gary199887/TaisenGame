@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameDirector : MonoBehaviour
 {
-    static int stage;
+    public static int stage;
     public static float gameTime;
     public static string playerName;
     public static bool gameClear;
@@ -12,7 +12,6 @@ public class GameDirector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        stage = 1;  // kari, would be set when stage selected
         gameClear = false;
         gameTime = 0;
         playerName = "Unknown";
