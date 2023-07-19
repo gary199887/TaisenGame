@@ -33,7 +33,7 @@ public class DialogManager : MonoBehaviour
         
         if (currentIndex < talks.Length - 1)    // when talks have been completely shown
         {
-            if (Input.GetKeyDown(KeyCode.Z))  // when z key down and allowed do something
+            if (Input.GetButtonDown("Submit"))  // when z key down and allowed do something
             {
                 if (timeCount > cd)
                 {
@@ -55,7 +55,7 @@ public class DialogManager : MonoBehaviour
         }
         else            // when current sentence id is at the last one
         {
-            if (Input.GetKeyDown(KeyCode.Z) && timeCount > cd)  // when z key down and allowed do something
+            if (Input.GetButtonDown("Submit") && timeCount > cd)  // when z key down and allowed do something
             {
                 // close dialog system and move back to talk system if the last sentence is completely shown
                 if (sentenceCompleted())

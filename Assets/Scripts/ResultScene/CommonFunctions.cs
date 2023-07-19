@@ -32,7 +32,7 @@ public class CommonFunctions : MonoBehaviour
     public void endGame()
     {
         //Esc clicked
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("ExitGame"))
         {
 
             #if UNITY_EDITOR                                        // environment check
