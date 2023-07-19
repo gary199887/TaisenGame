@@ -1,25 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameDirector : MonoBehaviour
 {
-    static int stage;
+    public static int stage;
     public static float gameTime;
     public static string playerName;
     public static bool gameClear;
-    Stage stageData;
+    static Stage stageData;
+    public DialogManager dialogManager;
     // Start is called before the first frame update
     void Start()
     {
-        stage = 1;  // kari, would be set when stage selected
         gameClear = false;
         gameTime = 0;
         playerName = "Unknown";
         stageData = StageManager.loadStage(stage);      // load stage data up to current stage
         setItemList(stageData.itemList);
         setCharaList(stageData.charaList);
-       
+        
     }
 
     // Update is called once per frame
@@ -27,6 +28,9 @@ public class GameDirector : MonoBehaviour
     {
         if(!gameClear)
             gameTime += Time.deltaTime;
+        else
+            if(!dialogManager.dialog.activeSelf)
+            SceneManager.LoadScene("ResultScene");
     }
 
     public static string getTimeString() {
@@ -35,7 +39,7 @@ public class GameDirector : MonoBehaviour
 
     public static string getTimeString(float time)
     {
-        return $"{time / 60: 00}:{time % 60: 00}";
+        return $"{time / 60:00}:{time % 60:00}";
     }
 
     public void setItemList(ItemList itemList)
@@ -50,5 +54,20 @@ public class GameDirector : MonoBehaviour
 
     public static void setPlayerName(string input) {
         playerName = input;
+    }
+
+    public static Rank getRank() {
+        return stageData.rank;
+    }
+
+    public static void saveRank(Rank rank) {
+        stageData.rank = rank;
+        StageManager.saveStage(stageData);
+    }
+
+    public void clearGame() {// would add some actions when clearing game
+        gameClear = true;
+        string[] endHint = new string[] {"クリアです", "Zキー押してリザルトを確認"};
+        dialogManager.showDialog(endHint);
     }
 }

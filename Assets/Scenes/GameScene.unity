@@ -1019,6 +1019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 849df1690a2dee44796403618bbc7439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogManager: {fileID: 1267644731}
 --- !u!1 &746126646
 GameObject:
   m_ObjectHideFlags: 0
@@ -2024,7 +2025,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8598077791122107411, guid: 23980dd69bbc27c40bfc2789b08ff672, type: 3}
       propertyPath: m_Name
-      value: tialogText
+      value: dialogText
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2840,7 +2841,7 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 7
 --- !u!1 &2108859283

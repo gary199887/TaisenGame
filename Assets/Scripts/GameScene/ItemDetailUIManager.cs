@@ -16,7 +16,7 @@ public class ItemDetailUIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cd = 0.5f;
+        cd = 0.1f;
         itemDetail.SetActive(false);
     }
 
@@ -28,6 +28,7 @@ public class ItemDetailUIManager : MonoBehaviour
             if(timeCount > cd)
             if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X))
             {
+                timeCount = 0;
                 itemDetail.SetActive(false);
                 PlayerController.canMove = true;
             }

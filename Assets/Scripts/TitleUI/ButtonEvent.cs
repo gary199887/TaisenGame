@@ -7,27 +7,16 @@ public class ButtonEvent:MonoBehaviour
     GameObject TitleUIs;
     [SerializeField]
     GameObject MenuUIs;
-    public void GoMenu()
-    {
-        TitleUIs.transform.DOScale(new Vector3(0, 0, 0), 0.3f);
-        MenuUIs.transform.DOScale(new Vector3(1, 1, 1), 0.3f);
-        //TitleUIs.SetActive(false);
-        //MenuUIs.SetActive(true);
-    }
 
-    public static void GameEnd()
-    {
-        //ÉQÅ[ÉÄèIóπ
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
-    }
+    public static int stageNum { get; private set; }
 
-    public void ChangeScene(string SceneName)
+
+
+    public void ChangeScene(int number)
     {
-        SceneManager.LoadScene(SceneName);
+        stageNum = number;
+        DontDestroyOnLoad(this.gameObject);
+        SceneManager.LoadScene("GameScene");
     }
 
     public void BackTitle()
@@ -40,6 +29,8 @@ public class ButtonEvent:MonoBehaviour
             }
         );
     }
+
+    
     public void NoMethod()
     {
 

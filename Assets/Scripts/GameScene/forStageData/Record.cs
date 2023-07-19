@@ -20,5 +20,16 @@ public class Record
 [Serializable]
 public class Rank {
     public List<Record> records = new List<Record>();
+
+    public bool addAndSortRecord(Record record) {
+        records.Add(record);
+        records.Sort((a, b) => { if (a.time > b.time) return 1; else return -1; });
+        if(records.Count > 5)records.RemoveAt(records.Count - 1);    // remove the last one
+        return contains(record);
+    }
+
+    public bool contains(Record record) {
+        return records.Contains(record);
+    }
     
 }
