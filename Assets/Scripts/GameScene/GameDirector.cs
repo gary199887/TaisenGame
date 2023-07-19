@@ -14,7 +14,6 @@ public class GameDirector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        stage = 1;  // kari, would be set when stage selected
         gameClear = false;
         gameTime = 0;
         playerName = "Unknown";

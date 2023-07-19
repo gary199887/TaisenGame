@@ -8,6 +8,10 @@ public class EndButton : MonoBehaviour,Button
     ButtonEvent buttonEvent;
     public void onClicked()
     {
-        buttonEvent.GameEnd();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }
