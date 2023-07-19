@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameDirector : MonoBehaviour
 {
-    public static int stage;
+    public static int stage = 1;
     public static float gameTime;
     public static string playerName;
     public static bool gameClear;

@@ -43,7 +43,7 @@ public class TitleCursor : MonoBehaviour
 
         if (other.gameObject.CompareTag("Button"))
         {
-            if (Input.GetKey(KeyCode.Z))
+            if (Input.GetButton("Submit"))
             {
                 other.gameObject.GetComponent<Button>().onClicked();    // get instanceof "Button" interface and call onClicked() method
             }
