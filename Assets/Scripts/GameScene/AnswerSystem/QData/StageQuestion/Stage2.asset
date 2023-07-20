@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05720617763041444bfbcc8b9eed4913, type: 3}
-  m_Name: StageQuestion1
+  m_Name: Stage2
   m_EditorClassIdentifier: 
-  stageId: 1
+  stageId: 2
   questions:
-  - {fileID: 11400000, guid: 87d5d973cb77573459b2b8dbd0eae762, type: 2}
-  - {fileID: 11400000, guid: 38b46586527ff4b4aad1da060a453560, type: 2}
+  - {fileID: 11400000, guid: 7f839050eae8f254cb26b9fdf4f94fee, type: 2}
+  - {fileID: 11400000, guid: e6e22f474e6316e408d25dbeb08871a1, type: 2}

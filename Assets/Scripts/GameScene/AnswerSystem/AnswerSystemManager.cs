@@ -1,21 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class AnswerSystemManager : MonoBehaviour
 {
     [SerializeField] GameObject answerSystem;
-    [SerializeField] QuestionData[] qData;          // 問題データ
+    [SerializeField] StageQuestionData[] stage;     // ステージ問題データ
     [SerializeField] Text[] questionText;           // 問題文テキスト
     [SerializeField] Text[] selectAnswerText;       // 選択肢テキスト
-    [SerializeField] UnityEngine.UI.Button button;
-    [SerializeField] Text ansCntText;               // 解答権数テキスト
+    [SerializeField] UnityEngine.UI.Button button;  // 初期選択ボタン
+    [SerializeField] Text ansCntText;               // 解答可能回数テキスト
     const int maxAnsCnt = 3;                        // 最大解答可能回数
     private int currentAnsCnt;                      // 現在の解答可能回数
 
     List<bool> isCorrectAnswer = new List<bool>();  // 解答正誤判定リスト
     private int currentQNum;                        // 現在の問題番号
+
+    private int stageNum = 0;                       // ステージ番号
+    
 
     private void Start()
     {
@@ -23,6 +27,7 @@ public class AnswerSystemManager : MonoBehaviour
         button.Select();
         currentQNum = 0;
         currentAnsCnt = maxAnsCnt;
+        //stageNum = GameDirector.stage - 1;    // ステージ番号を取得
     }
 
     // Update is called once per frame
@@ -41,10 +46,10 @@ public class AnswerSystemManager : MonoBehaviour
     {
         PlayerController.canMove = false;   // make player connot do any action
 
-        // 解答権数をテキストに設定
+        // 解答可能数をテキストに設定
         ansCntText.text = "解答可能回数：" + currentAnsCnt + "/" + maxAnsCnt;
 
-        // 問題文をテキストに設定
+        // 問題・解答文を設定
         currentQNum = 0;
         SetQAText(currentQNum);
         
@@ -54,8 +59,9 @@ public class AnswerSystemManager : MonoBehaviour
     // 解答選択
     public void ClickAnswer(int selectNum)
     {
-        // 正誤判定
-        if (qData[currentQNum].CorrectAnswer == qData[currentQNum].SelectAnswer[selectNum])
+        // 正誤判定（ステージ対応）
+        if (stage[stageNum].Questions[currentQNum].CorrectAnswer ==
+            stage[stageNum].Questions[currentQNum].SelectAnswer[selectNum])
         {
             isCorrectAnswer.Add(true);
             Debug.Log("正解");
@@ -68,8 +74,9 @@ public class AnswerSystemManager : MonoBehaviour
 
         ++currentQNum;
         // 全問解答したかチェック
-        if (currentQNum == qData.Length)
+        if (currentQNum == stage[stageNum].Questions.Length)
         {
+            // 解答終了
             EndAnswer();
         }
         else
@@ -82,13 +89,14 @@ public class AnswerSystemManager : MonoBehaviour
     // 問題・解答文を設定
     private void SetQAText(int currentQNum)
     {
+        // （ステージ対応）
         // 問題文をテキストに設定
-        questionText[0].text = "Q." + qData[currentQNum].QuestionNum;
-        questionText[1].text = qData[currentQNum].Question;
+        questionText[0].text = "Q." + stage[stageNum].Questions[currentQNum].QNum;
+        questionText[1].text = stage[stageNum].Questions[currentQNum].QSentence;
 
         // 回答文をテキストに設定
-        selectAnswerText[0].text = qData[currentQNum].SelectAnswer[0];
-        selectAnswerText[1].text = qData[currentQNum].SelectAnswer[1];
+        selectAnswerText[0].text = stage[stageNum].Questions[currentQNum].SelectAnswer[0];
+        selectAnswerText[1].text = stage[stageNum].Questions[currentQNum].SelectAnswer[1];
     }
     
     // 解答終了
