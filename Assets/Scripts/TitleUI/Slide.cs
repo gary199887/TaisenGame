@@ -13,8 +13,6 @@ public class Slide : MonoBehaviour
     {
         cvgp = GetComponent<CanvasGroup>();
     }
-
-    
     
     void Out()
     {
