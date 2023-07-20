@@ -47,17 +47,17 @@ public class PlayerController : MonoBehaviour
     {
         if (!canMove) return;
         if (other.gameObject.CompareTag("Item")) {
-            if (Input.GetKeyDown(KeyCode.Z)) {
+            if (Input.GetButtonDown("Submit")) {
                 // get item
                 int id = Int32.Parse(other.gameObject.name.Split("_")[1]);          // identify items' id with their name after '_' -> "Item_1" get 1
-                other.gameObject.GetComponent<SpriteRenderer>().color = Color.grey; // make item become grey after being gotten
+                other.gameObject.GetComponent<SpriteRenderer>().color = Color.grey + new Color(0, 0, 0, -0.5f); // make item become grey after being gotten
                 itemDetailUIManager.showItemDetail(id);                             // show item detail
             }
         }
 
         if (other.gameObject.CompareTag("Button"))
         {
-            if (Input.GetKeyDown(KeyCode.Z))
+            if (Input.GetButtonDown("Submit"))
             {
                 other.gameObject.GetComponent<Button>().onClicked();                // get instanceof "Button" interface and call onClicked() method
             }

@@ -26,7 +26,7 @@ public class ItemDetailUIManager : MonoBehaviour
         {
             timeCount += Time.deltaTime;
             if(timeCount > cd)
-            if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X))
+            if (Input.GetButtonDown("Submit") || Input.GetButtonDown("Cancel"))
             {
                 timeCount = 0;
                 itemDetail.SetActive(false);

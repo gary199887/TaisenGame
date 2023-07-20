@@ -42,13 +42,13 @@ public class TalkSystemManager : MonoBehaviour
                 startTalk(currentChosen == 0 ? currentChosen = charaList.Count - 1 : --currentChosen);
                 timeCount = 0;
             }
-            else if (Input.GetKeyDown(KeyCode.X))  // move back to detect part
+            else if (Input.GetButtonDown("Cancel"))  // move back to detect part
             {
                 PlayerController.canMove = true;
                 timeCount = 0;
                 talkSystem.SetActive(false);
             }
-            else if (Input.GetKeyDown(KeyCode.Z))  // talk with chosen charactor
+            else if (Input.GetButtonDown("Submit"))  // talk with chosen charactor
             {
                 timeCount = 0;
                 dialogManager.showDialog(charaList[currentChosen].talks);   // throw the talk array(string[]) of current chosen charactor to dialog system
