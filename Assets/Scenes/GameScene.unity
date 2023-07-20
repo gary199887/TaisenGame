@@ -970,6 +970,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogManager: {fileID: 1267644731}
+  answerSystem: {fileID: 954541027}
   backGroundImages:
   - {fileID: 21300000, guid: 6d815e90080024c48b87d8b9f5387d8a, type: 3}
   - {fileID: 21300000, guid: 18348c87338b3b9409eaffff62f0d728, type: 3}
@@ -1005,9 +1006,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   answerSystem: {fileID: 954541027}
-  qData:
-  - {fileID: 11400000, guid: 87d5d973cb77573459b2b8dbd0eae762, type: 2}
-  - {fileID: 11400000, guid: 38b46586527ff4b4aad1da060a453560, type: 2}
+  stage:
+  - {fileID: 11400000, guid: 07d64089809812a44a5acd30ddd7f064, type: 2}
+  - {fileID: 11400000, guid: 0c2859c41c91e6544a75780e180ed9fc, type: 2}
   questionText:
   - {fileID: 1661452416}
   - {fileID: 2108859285}
@@ -1016,6 +1017,7 @@ MonoBehaviour:
   - {fileID: 846201822}
   button: {fileID: 814711772}
   ansCntText: {fileID: 609183413}
+  gameDirector: {fileID: 707816977}
 --- !u!4 &746126648
 Transform:
   m_ObjectHideFlags: 0
@@ -1342,7 +1344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &954541028
 Transform:
   m_ObjectHideFlags: 0

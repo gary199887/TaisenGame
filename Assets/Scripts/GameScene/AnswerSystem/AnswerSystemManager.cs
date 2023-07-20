@@ -61,6 +61,7 @@ public class AnswerSystemManager : MonoBehaviour
     // 解答選択
     public void ClickAnswer(int selectNum)
     {
+        if (GameDirector.gamePause || GameDirector.gameOver) return;
         // 正誤判定（ステージ対応）
         if (stage[stageNum].Questions[currentQNum].CorrectAnswer ==
             stage[stageNum].Questions[currentQNum].SelectAnswer[selectNum])
@@ -115,12 +116,14 @@ public class AnswerSystemManager : MonoBehaviour
             ansCntText.text = "解答可能回数：" + currentAnsCnt + "/" + maxAnsCnt;
             if (currentAnsCnt <= 0)
             {
+                ansCntText.color = Color.red;
+                gameDirector.overGame();
                 Debug.Log("ゲームオーバー");
                 return;
             }
             // 正誤判定リストのリセット
             isCorrectAnswer.Clear();
-
+            gameDirector.hasWrongAnswer();
         }
         else
         {
