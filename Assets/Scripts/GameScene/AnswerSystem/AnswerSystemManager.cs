@@ -12,6 +12,8 @@ public class AnswerSystemManager : MonoBehaviour
     [SerializeField] Text[] selectAnswerText;       // 選択肢テキスト
     [SerializeField] UnityEngine.UI.Button button;  // 初期選択ボタン
     [SerializeField] Text ansCntText;               // 解答可能回数テキスト
+    [SerializeField] GameDirector gameDirector;
+
     const int maxAnsCnt = 3;                        // 最大解答可能回数
     private int currentAnsCnt;                      // 現在の解答可能回数
 
@@ -102,28 +104,28 @@ public class AnswerSystemManager : MonoBehaviour
     // 解答終了
     private void EndAnswer()
     {
+        
         // 不正解が含まれているかチェック
         if (isCorrectAnswer.Contains(false))
         {
             Debug.Log("不正解あり");
             // 解答権数を減らす
             currentAnsCnt--;
-            if(currentAnsCnt <= 0)
+            // 解答権数をテキストに設定
+            ansCntText.text = "解答可能回数：" + currentAnsCnt + "/" + maxAnsCnt;
+            if (currentAnsCnt <= 0)
             {
                 Debug.Log("ゲームオーバー");
                 return;
             }
             // 正誤判定リストのリセット
             isCorrectAnswer.Clear();
-            // 操作パートへ戻る
-            PlayerController.canMove = true;
-            answerSystem.SetActive(false);
+
         }
         else
         {
             // 全問正解
             Debug.Log("全問正解");
-            GameDirector gameDirector = GameObject.Find("GameDirector").GetComponent<GameDirector>();
             gameDirector.clearGame();
             answerSystem.SetActive(false);
         }

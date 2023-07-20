@@ -9,8 +9,10 @@ public class GameDirector : CommonFunctions
     public static float gameTime;
     public static string playerName;
     public static bool gameClear;
+    public static bool gamePause;
     static Stage stageData;
     public DialogManager dialogManager;
+    [SerializeField] GameObject answerSystem;
     public Sprite[] backGroundImages;
     public GameObject backGround;
     public GameObject itemPrefab;
@@ -39,6 +41,13 @@ public class GameDirector : CommonFunctions
         else
             if(!dialogManager.dialog.activeSelf)
             SceneManager.LoadScene("ResultScene");
+
+        if (gamePause && !dialogManager.dialog.activeSelf)
+        { // ëÄçÏÉpÅ[ÉgÇ÷ñﬂÇÈ
+            gamePause = false;
+            PlayerController.canMove = true;
+            answerSystem.SetActive(false);
+        }
         endGame();
     }
 
@@ -78,5 +87,11 @@ public class GameDirector : CommonFunctions
         gameClear = true;
         string[] endHint = stageData.endTalks.ToArray();
         dialogManager.showDialog(endHint);
+    }
+
+    public void hasWrongAnswer() {
+        string[] wrongHint = { "ä‘à·Ç¢Ç™Ç†ÇÈÇÊ" };
+        dialogManager.showDialog(wrongHint);
+        gamePause = true;
     }
 }
