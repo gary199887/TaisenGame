@@ -1264,9 +1264,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogManager: {fileID: 1267644731}
+  answerSystem: {fileID: 954541027}
   backGroundImages:
   - {fileID: 21300000, guid: 6d815e90080024c48b87d8b9f5387d8a, type: 3}
-  - {fileID: 21300000, guid: 6d815e90080024c48b87d8b9f5387d8a, type: 3}
+  - {fileID: 21300000, guid: 18348c87338b3b9409eaffff62f0d728, type: 3}
   backGround: {fileID: 70754149}
   itemPrefab: {fileID: 6297469067418959944, guid: c676b755234145a4d9e7c20213563ef7, type: 3}
 --- !u!1 &746126646
@@ -1311,6 +1312,7 @@ MonoBehaviour:
   - {fileID: 49864707}
   - {fileID: 1341978511}
   ansCntText: {fileID: 609183413}
+  gameDirector: {fileID: 707816977}
 --- !u!4 &746126648
 Transform:
   m_ObjectHideFlags: 0
@@ -1637,7 +1639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &954541028
 Transform:
   m_ObjectHideFlags: 0
