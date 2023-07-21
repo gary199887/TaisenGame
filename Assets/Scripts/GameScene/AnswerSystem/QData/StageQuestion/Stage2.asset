@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05720617763041444bfbcc8b9eed4913, type: 3}
   m_Name: Stage2
   m_EditorClassIdentifier: 
-  stageId: 2
   questions:
   - {fileID: 11400000, guid: 7f839050eae8f254cb26b9fdf4f94fee, type: 2}
-  - {fileID: 11400000, guid: e6e22f474e6316e408d25dbeb08871a1, type: 2}
+  - {fileID: 11400000, guid: ff3aa47f24b707140ae9fc7120e7690a, type: 2}
+  - {fileID: 11400000, guid: 96f7f51065c1b7b48a79b02a5d79231e, type: 2}
