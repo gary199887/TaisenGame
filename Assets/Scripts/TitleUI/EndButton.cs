@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EndButton : MonoBehaviour,Button
 {
-    [SerializeField]
-    ButtonEvent buttonEvent;
     public void onClicked()
     {
 #if UNITY_EDITOR
