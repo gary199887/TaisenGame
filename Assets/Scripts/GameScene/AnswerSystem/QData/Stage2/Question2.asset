@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5251655988429584fac8e77ffef0f7d1, type: 3}
   m_Name: Question2
   m_EditorClassIdentifier: 
-  questionNum: 2
-  question: "\u3069\u306E\u3088\u3046\u306B\uFF1F"
+  qNum: 2
+  qSentence: "\u6BBA\u5BB3\u306B\u4F7F\u3063\u305F\u3082\u306E\u306F\uFF1F"
   selectAnswer:
-  - "\u64B2\u6BBA"
-  - "\u9283\u6BBA"
-  correctAnswer: "\u64B2\u6BBA"
+  - "\u82B1\u74F6\u306E\u30B9\u30BA\u30E9\u30F3"
+  - "\u304A\u5E97\u306E\u98DF\u4E8B\u7528\u30CA\u30A4\u30D5"
+  - "\u5F01\u8B77\u58EB\u306E\u30DA\u30F3"
+  correctAnswer: "\u82B1\u74F6\u306E\u30B9\u30BA\u30E9\u30F3"
