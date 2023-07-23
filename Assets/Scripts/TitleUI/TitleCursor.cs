@@ -26,6 +26,7 @@ public class TitleCursor : MonoBehaviour
         if (!canMove) return;
         Vector3 inputDirection = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
         transform.Translate(inputDirection * speed * Time.deltaTime);
+
     }
 
 
