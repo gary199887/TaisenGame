@@ -17,7 +17,12 @@ public class StageChangeButton : MonoBehaviour,Button
 
     public void onClicked()
     {
-        audioSource.PlayOneShot(audioClip);
+        audioSource.clip = audioClip;
+        audioSource.Play();
+        if(!audioSource.isPlaying)
+        {
+            audioSource.clip = null; 
+        }
         Invoke("InvokeExecute", 0.2f);
     }
 

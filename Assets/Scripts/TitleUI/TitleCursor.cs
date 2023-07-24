@@ -11,8 +11,6 @@ public class TitleCursor : MonoBehaviour
    
     public static bool canMove;             // bool to check whether player can do any action(whether it is in detect part)
     
-
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -40,8 +38,7 @@ public class TitleCursor : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (!canMove) return;
-
+        if (!canMove) return;  
         if (other.gameObject.CompareTag("Button"))
         {
             if (Input.GetButton("Submit"))
