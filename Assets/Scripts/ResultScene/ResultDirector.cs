@@ -22,6 +22,7 @@ public class ResultDirector : CommonFunctions
     public GameObject currentData, rankList;
     // two different hints to identify if the current record is in rank
     public GameObject newRecord, outOfRank;
+    
 
     // local datas
     Rank rank;

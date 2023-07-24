@@ -13,6 +13,7 @@ public class TalkSystemManager : MonoBehaviour
     public Text[] charaDetailText;          // UI components, 0:name  1:gender  2:relationShip  3:secret
     float timeCount;                        // timeCounter
     const float cd = 0.2f;                  // gap between two actions(prevent making multiple actions by the same key-down)
+    [SerializeField]AudioSource[] SE;       // 0: cancel, 1: change selection
     private void Start()
     {
         // clear timer and initialize data when scene loaded
@@ -35,17 +36,20 @@ public class TalkSystemManager : MonoBehaviour
             if (Input.GetAxis("Horizontal") > 0.1)  // get next chara
             {
                 startTalk(currentChosen == charaList.Count - 1 ? currentChosen = 0 : ++currentChosen);
+                SE[1].Play();
                 timeCount = 0;  // clear counter when whatever actions had been taken
             }
             else if (Input.GetAxis("Horizontal") < -0.1)
             {
                 startTalk(currentChosen == 0 ? currentChosen = charaList.Count - 1 : --currentChosen);
+                SE[1].Play();
                 timeCount = 0;
             }
             else if (Input.GetButtonDown("Cancel"))  // move back to detect part
             {
                 PlayerController.canMove = true;
                 timeCount = 0;
+                SE[0].Play();
                 talkSystem.SetActive(false);
             }
             else if (Input.GetButtonDown("Submit"))  // talk with chosen charactor

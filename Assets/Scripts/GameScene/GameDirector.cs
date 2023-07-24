@@ -24,6 +24,7 @@ public class GameDirector : CommonFunctions
     public Sprite[] backGroundImages;
     public GameObject backGround;
     public GameObject itemPrefab;
+    [SerializeField] AudioSource[] BGM;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,8 +46,9 @@ public class GameDirector : CommonFunctions
             createItem.name = $"Item_{item.id}";
         }
 
-        // set background image depends on current stage number
-        backGround.GetComponent<SpriteRenderer>().sprite = backGroundImages[stage - 1]; 
+        // set background image and music depends on current stage number
+        backGround.GetComponent<SpriteRenderer>().sprite = backGroundImages[stage - 1];
+        BGM[stage - 1].Play();
     }
 
     // Update is called once per frame
@@ -86,7 +88,6 @@ public class GameDirector : CommonFunctions
     public void setItemList(ItemList itemList)
     {
         ItemDetailUIManager.itemList = itemList;
-        PlayerController.itemBox = new Item[itemList.items.Count];
     }
 
     // initialize charalist after loading data

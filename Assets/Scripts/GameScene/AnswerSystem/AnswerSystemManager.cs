@@ -12,6 +12,7 @@ public class AnswerSystemManager : MonoBehaviour
     [SerializeField] UnityEngine.UI.Button[] selAnsButtons;     // 選択肢ボタン
     [SerializeField] Text ansCntText;                           // 解答可能回数テキスト
     [SerializeField] GameDirector gameDirector;
+    [SerializeField] AudioSource clickSE;
 
     const int maxAnsCnt = 3;                        // 最大解答可能回数
     private int currentAnsCnt;                      // 現在の解答可能回数
@@ -19,7 +20,7 @@ public class AnswerSystemManager : MonoBehaviour
     List<bool> isCorrectAnswer = new List<bool>();  // 解答正誤判定リスト
     private int currentQNum;                        // 現在の問題番号
 
-    private int stageNum = 0;                       // ステージ番号
+    private int stageNum;                           // ステージ番号
     
 
     private void Start()
@@ -28,7 +29,7 @@ public class AnswerSystemManager : MonoBehaviour
         selAnsButtons[0].Select();
         currentQNum = 0;
         currentAnsCnt = maxAnsCnt;
-        //stageNum = GameDirector.stage - 1;    // ステージ番号を取得
+        stageNum = GameDirector.stage - 1;    // ステージ番号を取得
     }
 
     // Update is called once per frame
@@ -39,6 +40,8 @@ public class AnswerSystemManager : MonoBehaviour
         if (Input.GetButtonDown("Submit"))
         {
             //button.onClick.Invoke();　   // ボタンを押したことにする
+            if (!(GameDirector.gameClear || GameDirector.gamePause || GameDirector.gameOver)) 
+            clickSE.Play();
         }
     }
 
@@ -53,14 +56,14 @@ public class AnswerSystemManager : MonoBehaviour
         // 問題・解答文を設定
         currentQNum = 0;
         SetQAText(currentQNum);
-        
+        foreach (var button in selAnsButtons) button.interactable = true;   // make buttons able to be selected when starting answering
+
         answerSystem.SetActive(true);
     }
 
     // 解答選択
     public void ClickAnswer(int selectNum)
     {
-        if (GameDirector.gamePause || GameDirector.gameOver) return;
         // 正誤判定（ステージ対応）
         if (stage[stageNum].Questions[currentQNum].CorrectAnswer ==
             stage[stageNum].Questions[currentQNum].SelectAnswer[selectNum])
@@ -140,7 +143,7 @@ public class AnswerSystemManager : MonoBehaviour
     // 解答終了
     private void EndAnswer()
     {
-        
+        foreach (var button in selAnsButtons) button.interactable = false;      // make buttons not able to be selected when ending answering
         // 不正解が含まれているかチェック
         if (isCorrectAnswer.Contains(false))
         {
@@ -150,7 +153,7 @@ public class AnswerSystemManager : MonoBehaviour
             // 解答権数をテキストに設定
             ansCntText.text = "解答可能回数：" + currentAnsCnt + "/" + maxAnsCnt;
             if (currentAnsCnt <= 0)
-            {
+            {   // set font color of count text as red then run overGame method from gameDirector
                 ansCntText.color = Color.red;
                 gameDirector.overGame();
                 Debug.Log("ゲームオーバー");
