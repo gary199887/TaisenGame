@@ -20,7 +20,7 @@ public class AnswerSystemManager : MonoBehaviour
     List<bool> isCorrectAnswer = new List<bool>();  // 解答正誤判定リスト
     private int currentQNum;                        // 現在の問題番号
 
-    private int stageNum = 0;                       // ステージ番号
+    private int stageNum;                           // ステージ番号
     
 
     private void Start()
@@ -29,7 +29,7 @@ public class AnswerSystemManager : MonoBehaviour
         selAnsButtons[0].Select();
         currentQNum = 0;
         currentAnsCnt = maxAnsCnt;
-        //stageNum = GameDirector.stage - 1;    // ステージ番号を取得
+        stageNum = GameDirector.stage - 1;    // ステージ番号を取得
     }
 
     // Update is called once per frame
