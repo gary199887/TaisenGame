@@ -8,7 +8,8 @@ public class DialogManager : MonoBehaviour
     // game object and components to control
     public GameObject dialog;
     public Text dialogText;
-    
+    AudioSource talkSE;
+
     // local datas
     float timeCount;        // timer
     const float cd = 0.1f;  // gap between one action and another
@@ -20,6 +21,7 @@ public class DialogManager : MonoBehaviour
     private void Start()
     {
         timeCount = 0;
+        talkSE = GetComponent<AudioSource>();
         dialog.SetActive(false);
         currentIndex = 0;
         skipped = false;
@@ -30,10 +32,10 @@ public class DialogManager : MonoBehaviour
         if (!dialog.activeSelf) return;
         timeCount += Time.deltaTime;
         dialogText.text = keepTalking(talks[currentIndex] + blinkingHint());
-        
-        if (currentIndex < talks.Length - 1)    // when talks have been completely shown
+
+        if (currentIndex < talks.Length - 1)    // when current index is not the last one
         {
-            if (Input.GetButtonDown("Submit"))  // when z key down and allowed do something
+            if (Input.GetButtonDown("Submit"))  // when z / enter key down and allowed do something
             {
                 if (timeCount > cd)
                 {
@@ -94,7 +96,13 @@ public class DialogManager : MonoBehaviour
     }
 
     bool sentenceCompleted() {                      // check if current sentence has been completely shown
-        return keepTalking(talks[currentIndex]).Length == talks[currentIndex].Length;
+        bool result = keepTalking(talks[currentIndex]).Length == talks[currentIndex].Length;
+        if (!result)
+        {
+            if (!talkSE.isPlaying) talkSE.Play();
+        }
+        else talkSE.Stop();
+        return result;
     }
 
     string blinkingHint(){                         // turn the last of the santence + "Б@Бе" on/off in every 0.5 sec 
