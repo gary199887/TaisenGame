@@ -1,0 +1,92 @@
+{
+  "charaList": [
+    {
+      "id": 0,
+      "name": "管理人",
+      "gender": "女",
+      "relationShip": "",
+      "secret": "",
+      "talks": [ "", "" ]
+    },
+    {
+      "id": 1,
+      "name": "同居人",
+      "gender": "男",
+      "relationShip": "",
+      "secret": "",
+      "talks": [ "", "" ]
+    },
+    {
+      "id": 2,
+      "name": "隣人",
+      "gender": "男",
+      "relationShip": "",
+      "secret": "",
+      "talks": [ "", "" ]
+    },
+    {
+      "id": 3,
+      "name": "同居人の友人A",
+      "gender": "女",
+      "relationShip": "",
+      "secret": "",
+      "talks": [ "", "" ]
+    }
+  ],
+  "itemList": {
+    "items": [
+      {
+        "id": 0,
+        "name": "A",
+        "description": "",
+        "pos": {
+          "x": -1.45,
+          "y": -0.78,
+          "z": 0.0
+        }
+      },
+      {
+        "id": 1,
+        "name": "B",
+        "description": "",
+        "pos": {
+          "x": 4.236935,
+          "y": 0.0,
+          "z": 0.0
+        }
+      },
+      {
+        "id": 2,
+        "name": "C",
+        "description": "",
+        "pos": {
+          "x": 7.76,
+          "y": 0.0,
+          "z": 0.0
+        }
+      },
+      {
+        "id": 3,
+        "name": "D",
+        "description": "",
+        "pos": {
+          "x": 1.1,
+          "y": -0.191,
+          "z": 0.0
+        }
+      },
+      {
+        "id": 4,
+        "name": "E",
+        "description": "",
+        "pos": {
+          "x": -4.179714,
+          "y": -2.78423,
+          "z": 0.0
+        }
+      }
+    ]
+  },
+  "rank": { "records": [] },
+  "endTalks": [ "正解！犯人はだ", "証拠：", "動機：", "凶器：", "クリアです\nZキー押してリザルトを確認" ]
+}
