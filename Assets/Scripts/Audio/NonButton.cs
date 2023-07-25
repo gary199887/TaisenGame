@@ -11,7 +11,12 @@ public class NonButton : MonoBehaviour,Button
     AudioSource audioSource;
     public void onClicked()
     {
-        audioSource.PlayOneShot(audioClip);
+        audioSource.clip = audioClip;
+        audioSource.Play();
+        if(!audioSource.isPlaying)
+        {
+            audioSource.clip = null;
+        }
     }
 
     
