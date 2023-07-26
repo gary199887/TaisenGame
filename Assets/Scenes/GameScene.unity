@@ -2684,6 +2684,10 @@ MonoBehaviour:
   SE:
   - {fileID: 836025189}
   - {fileID: 300558326}
+  charaImage: {fileID: 1681334236}
+  charaSprites:
+  - {fileID: 21300000, guid: 0ee635bb4a588be4ca771c6fbe13c2b6, type: 3}
+  - {fileID: 21300000, guid: ffb18b1ba5517914c9f6ce7c7a82abac, type: 3}
 --- !u!114 &1267644731
 MonoBehaviour:
   m_ObjectHideFlags: 0

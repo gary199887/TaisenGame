@@ -13,7 +13,10 @@ public class TalkSystemManager : MonoBehaviour
     public Text[] charaDetailText;          // UI components, 0:name  1:gender  2:relationShip  3:secret
     float timeCount;                        // timeCounter
     const float cd = 0.2f;                  // gap between two actions(prevent making multiple actions by the same key-down)
-    [SerializeField]AudioSource[] SE;       // 0: cancel, 1: change selection
+    [SerializeField] AudioSource[] SE;       // 0: cancel, 1: change selection
+    [SerializeField] SpriteRenderer charaImage;
+    [SerializeField] Sprite[] charaSprites;
+    Vector3 charaImageScale;
     private void Start()
     {
         // clear timer and initialize data when scene loaded
@@ -21,6 +24,7 @@ public class TalkSystemManager : MonoBehaviour
         talkSystem.SetActive(false);
         timeCount = 0;
         dialogManager = gameObject.GetComponent<DialogManager>();
+        charaImageScale = charaImage.gameObject.transform.localScale;
     }
 
     // Update is called once per frame
@@ -70,10 +74,25 @@ public class TalkSystemManager : MonoBehaviour
         charaDetailText[1].text = $"性別：{chara.gender}";
         charaDetailText[2].text = $"人間関係：\n{chara.relationShip}";
         charaDetailText[3].text = $"秘密：\n{chara.secret}";
-        
+
+        changeCharaImage(chara);
         // clear timer
         timeCount = 0;
         // then start talk system
         talkSystem.SetActive(true);
+    }
+
+    // switch character image up to chara's gender 
+    void changeCharaImage(Chara chara)
+    {
+        if (chara.gender.Equals("男")) { 
+            charaImage.sprite = charaSprites[0];
+            charaImage.gameObject.transform.localScale = charaImageScale;
+        }
+        else
+        {
+            charaImage.sprite = charaSprites[1];
+            charaImage.gameObject.transform.localScale = charaImageScale * 0.8f;
+        }
     }
 }
