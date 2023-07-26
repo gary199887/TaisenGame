@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class AnswerSystemManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class AnswerSystemManager : MonoBehaviour
     [SerializeField] Text ansCntText;                           // 解答可能回数テキスト
     [SerializeField] GameDirector gameDirector;
     [SerializeField] AudioSource clickSE;
+    [SerializeField] CanvasGroup QAndA;
 
     const int maxAnsCnt = 3;                        // 最大解答可能回数
     private int currentAnsCnt;                      // 現在の解答可能回数
@@ -29,6 +31,8 @@ public class AnswerSystemManager : MonoBehaviour
         currentQNum = 0;
         currentAnsCnt = maxAnsCnt;
         stageNum = GameDirector.stage - 1;    // ステージ番号を取得
+        QAndA.alpha = 0.0f;
+        foreach (var button in selAnsButtons) button.interactable = false;
     }
 
     // Update is called once per frame
@@ -38,7 +42,6 @@ public class AnswerSystemManager : MonoBehaviour
 
         if (Input.GetButtonDown("Submit"))
         {
-            //button.onClick.Invoke();　   // ボタンを押したことにする
             if (!(GameDirector.gameClear || GameDirector.gamePause || GameDirector.gameOver)) 
             clickSE.Play();
         }
@@ -55,7 +58,6 @@ public class AnswerSystemManager : MonoBehaviour
         // 問題・解答文を設定
         currentQNum = 0;
         SetQAText(currentQNum);
-        foreach (var button in selAnsButtons) button.interactable = true;   // make buttons able to be selected when starting answering
 
         answerSystem.SetActive(true);
     }
@@ -68,14 +70,13 @@ public class AnswerSystemManager : MonoBehaviour
             stage[stageNum].Questions[currentQNum].SelectAnswer[selectNum])
         {
             isCorrectAnswer.Add(true);
-            Debug.Log("正解");
         }
         else
         {
             isCorrectAnswer.Add(false);
-            Debug.Log("不正解");
         }
 
+        foreach (var button in selAnsButtons) button.interactable = false;
         ++currentQNum;
         // 全問解答したかチェック
         if (currentQNum == stage[stageNum].Questions.Length)
@@ -86,13 +87,17 @@ public class AnswerSystemManager : MonoBehaviour
         else
         {
             // 次の問題へ
-            SetQAText(currentQNum);
+            QAndA.DOFade(0.0f, 0.3f).OnComplete(() => SetQAText(currentQNum));
         }
     }
 
     // 問題・解答文を設定
     private void SetQAText(int currentQNum)
     {
+        QAndA.DOFade(1.0f, 0.3f).OnComplete(() =>
+        {
+            foreach(var button in selAnsButtons) button.interactable = true;
+        });
         // 問題文をテキストに設定
         questionText[0].text = "Q." + stage[stageNum].Questions[currentQNum].QNum;
         questionText[1].text = stage[stageNum].Questions[currentQNum].QSentence;
@@ -142,11 +147,9 @@ public class AnswerSystemManager : MonoBehaviour
     // 解答終了
     private void EndAnswer()
     {
-        foreach (var button in selAnsButtons) button.interactable = false;      // make buttons not able to be selected when ending answering
         // 不正解が含まれているかチェック
         if (isCorrectAnswer.Contains(false))
         {
-            Debug.Log("不正解あり");
             // 解答権数を減らす
             currentAnsCnt--;
             // 解答権数をテキストに設定
@@ -155,17 +158,16 @@ public class AnswerSystemManager : MonoBehaviour
             {   // set font color of count text as red then run overGame method from gameDirector
                 ansCntText.color = Color.red;
                 gameDirector.overGame();
-                Debug.Log("ゲームオーバー");
                 return;
             }
             // 正誤判定リストのリセット
             isCorrectAnswer.Clear();
+            QAndA.DOFade(0.0f, 0.1f);
             gameDirector.hasWrongAnswer();
         }
         else
         {
             // 全問正解
-            Debug.Log("全問正解");
             gameDirector.clearGame();
             answerSystem.SetActive(false);
         }
