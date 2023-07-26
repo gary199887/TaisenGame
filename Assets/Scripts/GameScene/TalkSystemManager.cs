@@ -82,6 +82,7 @@ public class TalkSystemManager : MonoBehaviour
         talkSystem.SetActive(true);
     }
 
+    // switch character image up to chara's gender 
     void changeCharaImage(Chara chara)
     {
         if (chara.gender.Equals("’j")) { 
@@ -93,6 +94,5 @@ public class TalkSystemManager : MonoBehaviour
             charaImage.sprite = charaSprites[1];
             charaImage.gameObject.transform.localScale = charaImageScale * 0.8f;
         }
-
     }
 }
