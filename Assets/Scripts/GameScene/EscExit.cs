@@ -21,7 +21,7 @@ public class EscExit : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetButtonDown("ExitGame"))
         {
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;

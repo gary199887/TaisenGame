@@ -81,7 +81,7 @@ public class GameDirector : CommonFunctions
     // turning time(sec) float into string in format "mm:ss"
     public static string getTimeString(float time)
     {
-        return $"{time / 60:00}:{time % 60:00}";
+        return $"{(int)(time / 60):00}:{time % 60:00}";
     }
 
     // initialize itemlist after loading data at the beginning of the game
