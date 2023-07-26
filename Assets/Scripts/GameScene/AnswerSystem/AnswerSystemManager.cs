@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class AnswerSystemManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class AnswerSystemManager : MonoBehaviour
     [SerializeField] UnityEngine.UI.Button[] selAnsButtons;     // 選択肢ボタン
     [SerializeField] Text ansCntText;                           // 解答可能回数テキスト
     [SerializeField] GameDirector gameDirector;
+    [SerializeField] CanvasGroup QAndA;
 
     const int maxAnsCnt = 3;                        // 最大解答可能回数
     private int currentAnsCnt;                      // 現在の解答可能回数
@@ -29,6 +31,8 @@ public class AnswerSystemManager : MonoBehaviour
         currentQNum = 0;
         currentAnsCnt = maxAnsCnt;
         stageNum = GameDirector.stage - 1;    // ステージ番号を取得
+        QAndA.alpha = 0.0f;
+        foreach (var button in selAnsButtons) button.interactable = false;
     }
 
     // Update is called once per frame
@@ -74,6 +78,7 @@ public class AnswerSystemManager : MonoBehaviour
             Debug.Log("不正解");
         }
 
+        foreach (var button in selAnsButtons) button.interactable = false;
         ++currentQNum;
         // 全問解答したかチェック
         if (currentQNum == stage[stageNum].Questions.Length)
@@ -84,13 +89,17 @@ public class AnswerSystemManager : MonoBehaviour
         else
         {
             // 次の問題へ
-            SetQAText(currentQNum);
+            QAndA.DOFade(0.0f, 0.3f).OnComplete(() => SetQAText(currentQNum));
         }
     }
 
     // 問題・解答文を設定
     private void SetQAText(int currentQNum)
     {
+        QAndA.DOFade(1.0f, 0.3f).OnComplete(() =>
+        {
+            foreach(var button in selAnsButtons) button.interactable = true;
+        });
         // 問題文をテキストに設定
         questionText[0].text = "Q." + stage[stageNum].Questions[currentQNum].QNum;
         questionText[1].text = stage[stageNum].Questions[currentQNum].QSentence;
@@ -158,6 +167,7 @@ public class AnswerSystemManager : MonoBehaviour
             }
             // 正誤判定リストのリセット
             isCorrectAnswer.Clear();
+            QAndA.DOFade(0.0f, 0.1f);
             gameDirector.hasWrongAnswer();
         }
         else
