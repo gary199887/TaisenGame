@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer spriteRenderer;
     public static bool canMove;             // bool to check whether player can do any action(whether it is in detect part)
     public ItemDetailUIManager itemDetailUIManager;
-    public static Item[] itemBox;
+    [SerializeField] AudioSource clickSE;
+    [SerializeField] AudioSource getItemSE;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Item")) {
             if (Input.GetButtonDown("Submit")) {
                 // get item
+                getItemSE.Play();
                 int id = Int32.Parse(other.gameObject.name.Split("_")[1]);          // identify items' id with their name after '_' -> "Item_1" get 1
                 other.gameObject.GetComponent<SpriteRenderer>().color = Color.grey + new Color(0, 0, 0, -0.5f); // make item become grey after being gotten
                 itemDetailUIManager.showItemDetail(id);                             // show item detail
@@ -59,6 +61,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetButtonDown("Submit"))
             {
+                clickSE.Play();
                 other.gameObject.GetComponent<Button>().onClicked();                // get instanceof "Button" interface and call onClicked() method
             }
         }

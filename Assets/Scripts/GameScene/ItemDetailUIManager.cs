@@ -9,6 +9,7 @@ public class ItemDetailUIManager : MonoBehaviour
     public GameObject itemDetail;
     public Text itemName;
     public Text itemDescription;
+    [SerializeField] AudioSource cancelSE;
     
     public static ItemList itemList;        // item list for current stage, be set by GameDirector(loading stage data from file)
     float cd;                               // gap(time->sec) between two actions
@@ -30,6 +31,7 @@ public class ItemDetailUIManager : MonoBehaviour
             {
                 timeCount = 0;
                 itemDetail.SetActive(false);
+                cancelSE.Play();
                 PlayerController.canMove = true;
             }
         }
@@ -44,12 +46,6 @@ public class ItemDetailUIManager : MonoBehaviour
         // set the detail data to corresponded gameObj
         itemName.text = item.name;
         itemDescription.text = item.description;
-
-        // set the item to player's itemBox
-        PlayerController.itemBox[id] = item;
-        //foreach (Item value in PlayerController.itemBox) {    // check if the item is in itemBox(printed as "null" if it is not)
-        //    Debug.Log(value);
-        //} ;
 
         // make item detail UI visible
         itemDetail.SetActive(true);

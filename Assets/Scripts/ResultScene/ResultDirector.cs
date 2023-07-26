@@ -22,6 +22,7 @@ public class ResultDirector : CommonFunctions
     public GameObject currentData, rankList;
     // two different hints to identify if the current record is in rank
     public GameObject newRecord, outOfRank;
+    [SerializeField] AudioSource clickSE, scrollSE;
 
     // local datas
     Rank rank;
@@ -69,7 +70,9 @@ public class ResultDirector : CommonFunctions
         if (canJump)
         {
             if (Input.anyKeyDown) {
-                SceneManager.LoadScene("Title");
+                clickSE.Play();
+                jumpSceneAfterWait("Title", 0.15f);
+                //SceneManager.LoadScene("Title");
             }
             tenmetsu(anyKey);
 
@@ -83,7 +86,8 @@ public class ResultDirector : CommonFunctions
             {
                 currentData.transform.Translate(-speed, 0, 0);
                 rankList.transform.Translate(-speed, 0, 0);
-            } else startMove = false;
+            }
+            else { startMove = false; scrollSE.Stop(); }
         }
 
         // turn on/off "new record!!" hint if this time is a new record
@@ -93,6 +97,7 @@ public class ResultDirector : CommonFunctions
     }
 
     public void onEndEnteringName() {
+        clickSE.Play();
         // name length limitation in 10
         string name = nameInput.text.Substring(0, Mathf.Clamp(nameInput.text.Length, 0, 10));
         if (!nameInput.text.Equals("")) GameDirector.setPlayerName(name);
@@ -117,6 +122,7 @@ public class ResultDirector : CommonFunctions
         StartCoroutine(DelayMethod(2.5f, () =>
         {    // start sliding after waiting for 2.5 sec
             startMove = true;
+            scrollSE.Play();
         }));
 
         

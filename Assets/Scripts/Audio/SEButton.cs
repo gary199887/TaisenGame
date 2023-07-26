@@ -6,9 +6,16 @@ public class SEButton : MonoBehaviour,Button
 {
 
     [SerializeField]
-    string seName;
+    AudioClip audioClip;
+    AudioSource audioSource;
+    // Start is called before the first frame update
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     public void onClicked()
     {
-        AudioManager.Instance.Play(seName);
+        audioSource.PlayOneShot(audioClip);
     }
 }

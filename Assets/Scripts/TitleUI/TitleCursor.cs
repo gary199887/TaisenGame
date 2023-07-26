@@ -8,16 +8,15 @@ public class TitleCursor : MonoBehaviour
     [SerializeField]
     float speed;
     Animator animator;
-   
     public static bool canMove;             // bool to check whether player can do any action(whether it is in detect part)
-    
 
-    
+    RectTransform rect;
     // Start is called before the first frame update
     void Start()
     {
         canMove = true;
         animator = GetComponent<Animator>();
+        rect = GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
@@ -25,7 +24,8 @@ public class TitleCursor : MonoBehaviour
     {
         if (!canMove) return;
         Vector3 inputDirection = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-        transform.Translate(inputDirection * speed * Time.deltaTime);
+        rect.Translate(inputDirection * speed * Time.deltaTime);
+
     }
 
 
@@ -40,7 +40,7 @@ public class TitleCursor : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other)
     {
         if (!canMove) return;
-
+        animator.SetTrigger("OnButtonStay");
         if (other.gameObject.CompareTag("Button"))
         {
             if (Input.GetButton("Submit"))
