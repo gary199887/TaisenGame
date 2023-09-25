@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public ItemDetailUIManager itemDetailUIManager;
     [SerializeField] AudioSource clickSE;
     [SerializeField] AudioSource getItemSE;
+    public static Item[] itemBox;
     // Start is called before the first frame update
     void Start()
     {
