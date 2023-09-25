@@ -15,6 +15,7 @@ public class AnswerSystemManager : MonoBehaviour
     [SerializeField] GameDirector gameDirector;
     [SerializeField] AudioSource clickSE;
     [SerializeField] CanvasGroup QAndA;
+    [SerializeField] UnityEngine.UI.Button ReturnButton;        // 戻るボタン
 
     const int maxAnsCnt = 3;                        // 最大解答可能回数
     private int currentAnsCnt;                      // 現在の解答可能回数
@@ -60,6 +61,7 @@ public class AnswerSystemManager : MonoBehaviour
         currentQNum = 0;
         SetQAText(currentQNum);
 
+        ReturnButton.gameObject.SetActive(true);
         answerSystem.SetActive(true);
     }
 
@@ -88,7 +90,12 @@ public class AnswerSystemManager : MonoBehaviour
         else
         {
             // 次の問題へ
-            QAndA.DOFade(0.0f, 0.3f).OnComplete(() => SetQAText(currentQNum));
+            QAndA.DOFade(0.0f, 0.3f).OnComplete(() =>
+            {
+                if(ReturnButton.gameObject.activeSelf)
+                    ReturnButton.gameObject.SetActive(false);
+                SetQAText(currentQNum);
+            });
         }
     }
 
@@ -140,7 +147,7 @@ public class AnswerSystemManager : MonoBehaviour
         {
             for (int i = 0; i < selAnsNum; i++)
             {
-                selAnsButtons[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(400 * ((i % 2) * 2 - 1), -100 - (200 * (i / 2)));
+                selAnsButtons[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(400 * ((i % 2) * 2 - 1), -50 - (200 * (i / 2)));
             }
         }
     }
@@ -172,5 +179,15 @@ public class AnswerSystemManager : MonoBehaviour
             gameDirector.clearGame();
             answerSystem.SetActive(false);
         }
+    }
+
+    // 戻るボタン選択
+    public void OnReturnButton()
+    {
+        QAndA.DOFade(0.0f, 0.2f).OnComplete(() =>
+        {
+            PlayerController.canMove = true;
+            answerSystem.SetActive(false);
+        });
     }
 }
