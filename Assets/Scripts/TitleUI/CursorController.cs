@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
-using Unity.VisualScripting;
-using System;
-using System.Diagnostics.Tracing;
-using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class CursorController : MonoBehaviour
 {
@@ -15,7 +12,7 @@ public class CursorController : MonoBehaviour
     [SerializeField]
     Ease ease;
     [SerializeField]
-    Transform[] tfrm;
+    Transform[] trfm;
     Image image;
     int index;
 
@@ -26,7 +23,7 @@ public class CursorController : MonoBehaviour
     {
         image = GetComponent<Image>();
         index = 0;
-        image.transform.position = tfrm[0].position;
+        image.transform.position = trfm[0].position;
         image.DOFade(0, duration).SetLoops(-1, LoopType.Yoyo).SetEase(ease);
         isMove = true;
         isUp = false;
@@ -36,9 +33,12 @@ public class CursorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        check(isUp);
+        if(StageChangeButton.stageChange)
+        {
+            image.DOKill(true);
+        }
         move(isMove);
+        check(isUp);
     }
 
     Button button;
@@ -49,7 +49,6 @@ public class CursorController : MonoBehaviour
         {
             button = collision.gameObject.GetComponent<Button>();
             nowButton = collision.gameObject.transform.position;
-            Debug.Log(collision.gameObject.name);
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
@@ -93,20 +92,24 @@ public class CursorController : MonoBehaviour
             }
         }
 
-        if(input>0)
-        {
-            if (nowButton == tfrm[index].position&&index+1<tfrm.Length)
+      if(input>0)
+      {
+            Debug.Log("trfm.Length" + trfm.Length);
+            Debug.Log(index);
+            if(trfm.Length>index+1)
             {
-                image.transform.position = tfrm[index+1].position;
+                index++;
+                image.transform.position = trfm[index].position;
             }
-        }
-        else if(input>0) 
-        {
-            if(nowButton == tfrm[index].position&& index-1>0)
+      }
+      if(input<0)
+      {
+            if(0<=index-1)
             {
-                image.transform.position = tfrm[index - 1].position;
+                index--;
+                image.transform.position = trfm[index].position;
             }
-        }
+      }
 
 
     }
