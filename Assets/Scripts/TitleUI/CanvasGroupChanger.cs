@@ -33,8 +33,9 @@ public class CanvasGroupChanger : MonoBehaviour, Button
         now.DOFade(0, duration).SetEase(nowCvGp).
             OnComplete(() =>
             {
+                now.gameObject.SetActive(false);
                 next.gameObject.SetActive(true);
-                next.DOFade(1, duration).SetEase(nextCvGp).OnComplete(() => { now.gameObject.SetActive(false); });
+                next.DOFade(1, duration).SetEase(nextCvGp);
             });
     //    audioSource.PlayOneShot(audioClip);
     //    next.gameObject.SetActive(true);

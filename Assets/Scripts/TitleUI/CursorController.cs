@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class CursorController : MonoBehaviour
 {
@@ -16,17 +13,17 @@ public class CursorController : MonoBehaviour
     Image image;
     int index;
 
-    bool isMove;
-    bool isUp;
+    CanvasGroup mycanvasGroup;
+
     // Start is called before the first frame update
     void Start()
     {
         image = GetComponent<Image>();
+        mycanvasGroup = gameObject.transform.parent.GetComponent<CanvasGroup>();
         index = 0;
         image.transform.position = trfm[0].position;
         image.DOFade(0, duration).SetLoops(-1, LoopType.Yoyo).SetEase(ease);
-        isMove = true;
-        isUp = false;
+
         
     }
 
@@ -37,88 +34,60 @@ public class CursorController : MonoBehaviour
         {
             image.DOKill(true);
         }
-        move(isMove);
-        check(isUp);
+        move();
+        check();
     }
 
     Button button;
-    Vector3 nowButton;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Button"))
         {
             button = collision.gameObject.GetComponent<Button>();
-            nowButton = collision.gameObject.transform.position;
-        }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Button"))
-        {
-            isUp = true;
         }
     }
 
-    void move(bool isMove)
+
+
+    void move()
     {
-        if(!isMove) { return; }
-        //縦の条件
-        //ページがtitleであること
-        //横の条件　それ以外
 
-        float input=0;
-        if (this.gameObject.transform.parent.name=="Title")
+        float input = 0;
+
+        //横ボタン有効
+        if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow))
         {
-            //縦ボタン有効
-            if(Input.GetKeyUp(KeyCode.W)||Input.GetKeyUp(KeyCode.UpArrow))
-            {
-                input = -1;
-            }
-            if(Input.GetKeyUp(KeyCode.S)||Input.GetKeyUp(KeyCode.DownArrow))
-            {
-                input = 1;
-            }
+            input = 1;
         }
-        else
+        if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftArrow))
         {
-            //横ボタン有効
-            if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow))
-            {
-                input = 1;
-            }
-            if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftArrow))
-            {
-                input = -1;
-            }
+            input = -1;
         }
 
-      if(input>0)
-      {
-            Debug.Log("trfm.Length" + trfm.Length);
-            Debug.Log(index);
-            if(trfm.Length>index+1)
+        if (input > 0)
+        {
+            if (trfm.Length > index + 1)
             {
                 index++;
                 image.transform.position = trfm[index].position;
             }
-      }
-      if(input<0)
-      {
-            if(0<=index-1)
+        }
+        if (input < 0)
+        {
+            if (0 <= index - 1)
             {
                 index--;
                 image.transform.position = trfm[index].position;
             }
-      }
-
-
+        }
     }
 
-    void check(bool isUp)
+    void check()
     {
-        if(isUp&&Input.GetButtonUp("Submit"))
+        if(Input.GetButtonUp("Submit")&&mycanvasGroup.alpha>=1)
         {
             button.onClicked();
         }
     }
+
 }
