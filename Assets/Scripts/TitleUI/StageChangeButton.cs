@@ -15,6 +15,13 @@ public class StageChangeButton : MonoBehaviour,Button
     [SerializeField]
     AudioSource audioSource;
 
+    public static bool stageChange { get; private set; }
+
+    private void Awake()
+    {
+        stageChange = false;
+    }
+
     public void onClicked()
     {
         audioSource.clip = audioClip;
@@ -28,6 +35,7 @@ public class StageChangeButton : MonoBehaviour,Button
 
     void InvokeExecute()
     {
+        stageChange = true;
         GameDirector.stage = stageNum;
         SceneManager.LoadScene("GameScene");
     }

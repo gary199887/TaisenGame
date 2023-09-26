@@ -15,7 +15,7 @@ public class CanvasGroupChanger : MonoBehaviour, Button
 
     [Range(0,10)]
     [SerializeField]
-    float direction;
+    float duration;
 
     [SerializeField]
     Ease nowCvGp;
@@ -30,23 +30,27 @@ public class CanvasGroupChanger : MonoBehaviour, Button
 
     public void onClicked()
     {
-        audioSource.PlayOneShot(audioClip);
-        TitleCursor.canMove = false;
-        next.gameObject.SetActive(true);
-        now.DOFade(0, direction).SetEase(nowCvGp)
-       .OnComplete
-       (
-            () =>
+        now.DOFade(0, duration).SetEase(nowCvGp).
+            OnComplete(() =>
             {
-                next.DOFade(1, direction).SetEase(nextCvGp).OnComplete
-                (
-                    () =>
-                    {
-                        now.gameObject.SetActive(false);
-                        TitleCursor.canMove = true;
-                    }
-               );
-            }
-       );
+                next.gameObject.SetActive(true);
+                next.DOFade(1, duration).SetEase(nextCvGp).OnComplete(() => { now.gameObject.SetActive(false); });
+            });
+    //    audioSource.PlayOneShot(audioClip);
+    //    next.gameObject.SetActive(true);
+    //    now.DOFade(0, duration).SetEase(nowCvGp)
+    //   .OnComplete
+    //   (
+    //        () =>
+    //        {
+    //            next.DOFade(1, duration).SetEase(nextCvGp).OnComplete
+    //            (
+    //                () =>
+    //                {
+    //                    now.gameObject.SetActive(false);
+    //                }
+    //           );
+    //        }
+    //   );
     }
 }
