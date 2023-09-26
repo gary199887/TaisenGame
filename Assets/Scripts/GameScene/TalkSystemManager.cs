@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -13,6 +14,9 @@ public class TalkSystemManager : MonoBehaviour
     public Text[] charaDetailText;          // UI components, 0:name  1:gender  2:relationShip  3:secret
     float timeCount;                        // timeCounter
     const float cd = 0.2f;                  // gap between two actions(prevent making multiple actions by the same key-down)
+    public static bool choosingQuestion;
+    int currentQuestion;
+    string[][] questions;
     [SerializeField] AudioSource[] SE;       // 0: cancel, 1: change selection
     [SerializeField] SpriteRenderer charaImage;
     [SerializeField] Sprite[] charaSprites;
@@ -25,6 +29,12 @@ public class TalkSystemManager : MonoBehaviour
         timeCount = 0;
         dialogManager = gameObject.GetComponent<DialogManager>();
         charaImageScale = charaImage.gameObject.transform.localScale;
+        choosingQuestion = false;
+        currentQuestion = 0;
+        questions = new string[3][];
+        questions[0] = new string[] { "身元を聞く" };
+        questions[1] = new string[] { "アリバイを聞く" };
+        questions[2] = new string[] { "アイテムについて聞く" };
     }
 
     // Update is called once per frame
@@ -39,27 +49,48 @@ public class TalkSystemManager : MonoBehaviour
             if(!dialogManager.dialog.activeSelf)
             if (Input.GetAxis("Horizontal") > 0.1)  // get next chara
             {
-                startTalk(currentChosen == charaList.Count - 1 ? currentChosen = 0 : ++currentChosen);
+                if(!choosingQuestion)
+                           startTalk(currentChosen == charaList.Count - 1 ? currentChosen = 0 : ++currentChosen);
+                else 
+                           dialogManager.showDialog(questions[currentQuestion == questions.Length -1 ? currentQuestion = 0 : ++currentQuestion]);
                 SE[1].Play();
                 timeCount = 0;  // clear counter when whatever actions had been taken
             }
             else if (Input.GetAxis("Horizontal") < -0.1)
             {
-                startTalk(currentChosen == 0 ? currentChosen = charaList.Count - 1 : --currentChosen);
+                    if (!choosingQuestion)
+                        startTalk(currentChosen == 0 ? currentChosen = charaList.Count - 1 : --currentChosen);
+                    else dialogManager.showDialog(questions[currentQuestion == 0? currentQuestion = questions.Length - 1 : --currentQuestion]);
                 SE[1].Play();
                 timeCount = 0;
             }
             else if (Input.GetButtonDown("Cancel"))  // move back to detect part
             {
-                PlayerController.canMove = true;
-                timeCount = 0;
-                SE[0].Play();
-                talkSystem.SetActive(false);
-            }
+                    if (!choosingQuestion)
+                    {
+                        PlayerController.canMove = true;
+                        talkSystem.SetActive(false);
+                    }
+                    timeCount = 0;
+                    SE[0].Play();
+                }
             else if (Input.GetButtonDown("Submit"))  // talk with chosen charactor
             {
                 timeCount = 0;
-                dialogManager.showDialog(charaList[currentChosen].talks);   // throw the talk array(string[]) of current chosen charactor to dialog system
+                    if (!choosingQuestion)
+                    {
+                        choosingQuestion = true;
+                        dialogManager.showDialog(questions[currentQuestion]);
+                    }
+                    else
+                    {
+                        Chara chara = charaList[currentChosen];
+                     //choose ques
+                          
+                                dialogManager.showDialog(chara.talks.normalTalk[0].talks);
+                        
+                    }
+                    // throw the talk array(string[]) of current chosen charactor to dialog system
             }
         } 
     }

@@ -11,14 +11,17 @@ public class Chara
     public string gender;
     public string relationShip;
     public string secret;
-    public string[] talks;
+    public Talk talks;
 
-    public Chara(int id, string name, string gender, string relationShip, string secret, string[] talks) {
+    public Chara(int id, string name, string gender, string relationShip, string secret) {
         this.id = id;
         this.name = name;
         this.gender = gender;
         this.relationShip = relationShip;
         this.secret = secret;
-        this.talks = talks;
+    }
+
+    public void setTalks(Talk talk) {
+        talks = talk;
     }
 }
