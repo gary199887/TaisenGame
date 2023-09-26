@@ -35,10 +35,12 @@ public class GameDirector : CommonFunctions
         gameTime = 0;
         playerName = "Unknown";
 
+
         // load stage data up to current stage number
         stageData = StageManager.loadStage(stage);
         setItemList(stageData.itemList);
         setCharaList(stageData.charaList);
+        PlayerController.itemBox = new Item[stageData.itemList.items.Count];
         // create items with stage data
         foreach (Item item in stageData.itemList.items)
         {

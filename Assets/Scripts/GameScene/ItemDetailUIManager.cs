@@ -47,6 +47,13 @@ public class ItemDetailUIManager : MonoBehaviour
         itemName.text = item.name;
         itemDescription.text = item.description;
 
+        // set the item to player's itemBox
+        PlayerController.itemBox[id] = item;
+        //foreach (Item value in PlayerController.itemBox) {    // check if the item is in itemBox(printed as "null" if it is not)
+        //    try { Debug.Log(value.name); }
+        //    catch { Debug.Log("null"); }
+        //} 
+
         // make item detail UI visible
         itemDetail.SetActive(true);
     }
