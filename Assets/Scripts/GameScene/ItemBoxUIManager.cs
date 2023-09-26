@@ -7,22 +7,23 @@ using UnityEngine.UI;
 
 public class ItemBoxUIManager : MonoBehaviour
 {
-    [SerializeField]public GameObject itemBoxUI;
-    [SerializeField]public GameObject itemPrefab;
-    [SerializeField]public GameObject nullHint;
+    [SerializeField] public GameObject itemBoxUI;
+    [SerializeField] public GameObject itemPrefab;
+    [SerializeField] public GameObject nullHint;
     [SerializeField] public Text itemName;
     [SerializeField] public Text itemDetail;
-    [SerializeField] public Canvas canvas;
-    List<GameObject> itemGameObjects;
-    List<Item> itemObjects;
-    int currentShowing;
-    float timeCount;                        // timeCounter
-    const float cd = 0.2f;                  // gap between two actions(prevent making multiple actions by the same key-down)
+    [SerializeField] public Canvas canvas;          // canvas as parent of item prefab
+    List<GameObject> itemGameObjects;               // temporary gameObject list to destroy when itembox be closed
+    List<Item> itemObjects;                         // item list attached to gameObject list to get the corresponding item detail
+    int currentShowing;                             // current showing item index
+    float timeCount;                                // timeCounter
+    const float cd = 0.2f;                          // gap between two actions(prevent making multiple actions by the same key-down)
     Vector3 firstPosition;
 
     // Start is called before the first frame update
     void Start()
     {
+        // when gamescene loaded
         itemBoxUI.SetActive(false);
         nullHint.SetActive(false);
         itemGameObjects = new List<GameObject>();
@@ -37,7 +38,7 @@ public class ItemBoxUIManager : MonoBehaviour
     {
         if (itemBoxUI.activeSelf)
         {
-            // can do some actions only if talk system is active
+            // can do some actions only if itemBox UI is active
             timeCount += Time.deltaTime;
             if (timeCount > cd)  // to make a gap between choice changed or other actions
             {
@@ -63,22 +64,27 @@ public class ItemBoxUIManager : MonoBehaviour
         }
     }
 
+    // called by other scripts to open itemBox UI
     public void showItemBox() {
         PlayerController.canMove = false;
         itemBoxUI.SetActive(true);
-        int count = 0;
+        int count = 0; // collected item num
+        // check items in itemBox
         foreach (var item in PlayerController.itemBox)
         {
             if (item != null)
-            {
+            {   // instantiate item to UI when the slot is not null(is collected)
                 GameObject currentItem = Instantiate(itemPrefab, firstPosition + new Vector3(0.0f, -count * 50f, 0.0f), Quaternion.identity);
                 currentItem.GetComponent<Text>().text = item.name;
+                // set canvas as parent to make ui displayed
                 currentItem.transform.SetParent(canvas.transform, false);
+                // add the item to temporary lists
                 itemGameObjects.Add(currentItem);
                 itemObjects.Add(item);
                 count++;
             }
         }
+        // hint "item box is null now" if itembox is null
         if (count == 0) nullHint.SetActive(true);
         else { 
             currentShowing = 0;
@@ -86,6 +92,7 @@ public class ItemBoxUIManager : MonoBehaviour
         }
     }
 
+    // show item detail with index of temporary index
     void showItem(int id) {
         itemGameObjects[id].GetComponent<Text>().color = Color.green;
         Item item = itemObjects[id];
@@ -93,9 +100,11 @@ public class ItemBoxUIManager : MonoBehaviour
         itemDetail.text = item.description;
     }
 
+    // close itemBox UI
     void closeItemBox() {
         timeCount = 0;
         foreach (var itemGameObj in itemGameObjects) {
+            // clear text UI gameObjects
             Destroy(itemGameObj);
         }
         itemGameObjects.Clear();
