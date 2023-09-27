@@ -22,7 +22,7 @@ public class CursorController : MonoBehaviour
         mycanvasGroup = gameObject.transform.parent.GetComponent<CanvasGroup>();
         index = 0;
         image.transform.position = trfm[0].position;
-        image.DOFade(0, duration).SetLoops(-1, LoopType.Yoyo).SetEase(ease);
+        image.DOFade(0, duration).SetLoops(-1, LoopType.Yoyo).SetEase(ease).SetLink(gameObject);
 
         
     }
