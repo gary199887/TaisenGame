@@ -53,7 +53,7 @@ public class CursorController : MonoBehaviour
     {
 
         float input = 0;
-
+        
         //‰¡ƒ{ƒ^ƒ“—LŒø
         if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow))
         {
