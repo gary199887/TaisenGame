@@ -13,6 +13,7 @@ public class ItemBoxUIManager : MonoBehaviour
     [SerializeField] public Text itemName;
     [SerializeField] public Text itemDetail;
     [SerializeField] public Canvas canvas;          // canvas as parent of item prefab
+    [SerializeField] public TalkSystemManager talkSystemManager;
     List<GameObject> itemGameObjects;               // temporary gameObject list to destroy when itembox be closed
     List<Item> itemObjects;                         // item list attached to gameObject list to get the corresponding item detail
     int currentShowing;                             // current showing item index
@@ -42,7 +43,7 @@ public class ItemBoxUIManager : MonoBehaviour
             timeCount += Time.deltaTime;
             if (timeCount > cd)  // to make a gap between choice changed or other actions
             {
-               
+
                 if (Input.GetAxis("Vertical") < -0.1 && itemGameObjects.Count != 0)  // get next chara
                 {
                     itemGameObjects[currentShowing].GetComponent<Text>().color = Color.white;
@@ -57,8 +58,18 @@ public class ItemBoxUIManager : MonoBehaviour
                     //SE[1].Play();
                     timeCount = 0;
                 }
-                else if (Input.GetButtonDown("Cancel")) {
+                else if (Input.GetButtonDown("Cancel"))
+                {
+                    if(TalkSystemManager.choosingQuestion)
+                        talkSystemManager.startTalk(TalkSystemManager.currentChosen);
                     closeItemBox();
+                }
+                else if (Input.GetButton("Submit")) {
+                    if (itemObjects.Count > 0)
+                    {
+                        talkSystemManager.showItemTalk(itemObjects[currentShowing].id);
+                        closeItemBox();
+                    }
                 }
             }
         }
@@ -113,6 +124,7 @@ public class ItemBoxUIManager : MonoBehaviour
         itemDetail.text = "";
         nullHint.SetActive(false);
         itemBoxUI.SetActive(false);
+        if(!TalkSystemManager.choosingQuestion)
         PlayerController.canMove = true;
     }
 }

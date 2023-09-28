@@ -19,7 +19,8 @@ public class StageManager : MonoBehaviour
 
     public static Stage loadStage(int stageNum)
     {
-        filePath = "./Json/.stageData" + stageNum + ".json";
+        //filePath = "./Json/.stageData" + stageNum + ".json";
+        filePath = "./Json/.stageDataTest.json";
         if (File.Exists(filePath))
         {
             string data = File.ReadAllText(filePath);

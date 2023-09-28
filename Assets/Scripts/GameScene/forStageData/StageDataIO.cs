@@ -62,6 +62,7 @@ public class StageDataIO : MonoBehaviour
         stageData.charaList[0].setTalks(currentTalk);
 
         //// second chara
+        currentTalk = new Talk();
         currentTalk.normalTalk = new List<Talks> {
             new Talks(new string[] { "First Talk!", "I am waiter!", "Nice to meet you bro!" }),
             new Talks(new string[] { "Uh...", "I ... am waiter", "that's all." })
@@ -78,6 +79,7 @@ public class StageDataIO : MonoBehaviour
         stageData.charaList[1].setTalks(currentTalk);
 
         // 3rd chara
+        currentTalk = new Talk();
         currentTalk.normalTalk = new List<Talks> {
              new Talks(new string[] { "弁護士をやってます", "できるだけの協力はします" }),
              new Talks(new string[] { "以上です" })
@@ -90,7 +92,7 @@ public class StageDataIO : MonoBehaviour
             new Talks(new string[] { "自分が普段使っているペンですね。", "どこに落としたかと思ったらここだったですね。", "ウェーターさんが見つけてくれてよかったです。" }),
             null
         };
-        stageData.charaList[2].setTalks(currentTalk);
+        stageData.charaList[2].talks = currentTalk;
 
         foreach (var strarr in currentTalk.normalTalk) {
             foreach (var str in strarr.talks) {
@@ -111,6 +113,7 @@ public class StageDataIO : MonoBehaviour
 
 
         // 4th chara
+        currentTalk = new Talk();
         currentTalk.normalTalk = new List<Talks> {
             new Talks(new string[] { "初めまして", "私は写真家", "よろしくね" }),
             new Talks(new string[] { "写真以外にも色々やってるよ", "この店に関わる仕事も一つ担当してるからよく来るよ" }),
@@ -124,7 +127,7 @@ public class StageDataIO : MonoBehaviour
             null,
             null
         };
-        stageData.charaList[3].setTalks(currentTalk);
+        stageData.charaList[3].talks = currentTalk;
 
 
 
