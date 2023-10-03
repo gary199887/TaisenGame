@@ -8,7 +8,7 @@ public class StageManager : MonoBehaviour
     static string filePath = "./Json/.stageData.json";
     public static void saveStage(Stage stage)
     {
-        //filePath = "./Json/.stageData.json";
+        //filePath = "./Json/.stageDataTest.json";
         string json = JsonUtility.ToJson(stage);
         StreamWriter streamWriter = new StreamWriter(filePath);
         streamWriter.Write(json); streamWriter.Flush();
@@ -19,6 +19,7 @@ public class StageManager : MonoBehaviour
     public static Stage loadStage(int stageNum)
     {
         filePath = "./Json/.stageData" + stageNum + ".json";
+        //filePath = "./Json/.stageDataTest.json";
         if (File.Exists(filePath))
         {
             string data = File.ReadAllText(filePath);
