@@ -38,10 +38,11 @@ public class TalkSystemManager : MonoBehaviour
         // question system initialize
         choosingQuestion = false;
         currentQuestion = 0;
-        questions = new string[3];
-        questions[0] = new string("身元を聞く");
+        questions = new string[4];
+        questions[0] = new string("証言を聞く");
         questions[1] = new string("アリバイを聞く");
         questions[2] = new string("アイテムについて聞く");
+        questions[3] = charaList[currentChosen].talks.qa.question;
         normalTime = new int[charaList.Count];
         for (int i = 0; i < normalTime.Length; ++i)
             normalTime[i] = 0;
@@ -60,19 +61,42 @@ public class TalkSystemManager : MonoBehaviour
             if(!dialogManager.dialog.activeSelf && !itemBoxUIManager.itemBoxUI.activeSelf)
             if (Input.GetAxis("Horizontal") > 0.1)  // get next chara or question
             {
-                if(!choosingQuestion)
-                           startTalk(currentChosen == charaList.Count - 1 ? currentChosen = 0 : ++currentChosen);
-                else 
-                           showQuestion(questions[currentQuestion == questions.Length -1 ? currentQuestion = 0 : ++currentQuestion]);
+                    if (!choosingQuestion)
+                    {
+                        startTalk(currentChosen == charaList.Count - 1 ? currentChosen = 0 : ++currentChosen);
+                        questions[3] = charaList[currentChosen].talks.qa.question;
+                    }
+                    else
+                    {
+                        showQuestion(questions[currentQuestion == questions.Length - 1 ? currentQuestion = 0 : ++currentQuestion]);
+                        if (currentQuestion == questions.Length - 1)
+                        {
+                            Trigger trigger = charaList[currentChosen].talks.qa.trigger;
+                            if (normalTime[trigger.charaId] < trigger.normalTimes)   // set limitation if certain chara hasn't said the words
+                                showQuestion(questions[currentQuestion == questions.Length - 1 ? currentQuestion = 0 : ++currentQuestion]);     // skip this question
+                        }
+                    }
                 SE[1].Play();
                 timeCount = 0;  // clear counter when whatever actions had been taken
             }
             else if (Input.GetAxis("Horizontal") < -0.1)
             {
                     if (!choosingQuestion)
+                    {
                         startTalk(currentChosen == 0 ? currentChosen = charaList.Count - 1 : --currentChosen);
-                    else showQuestion(questions[currentQuestion == 0? currentQuestion = questions.Length - 1 : --currentQuestion]);
-                SE[1].Play();
+                        questions[3] = charaList[currentChosen].talks.qa.question;
+                    }
+                    else
+                    {
+                        showQuestion(questions[currentQuestion == 0 ? currentQuestion = questions.Length - 1 : --currentQuestion]);
+                        if (currentQuestion == questions.Length - 1)
+                        {
+                            Trigger trigger = charaList[currentChosen].talks.qa.trigger;
+                            if (normalTime[trigger.charaId] < trigger.normalTimes)   // set limitation if certain chara hasn't said the words
+                                showQuestion(questions[currentQuestion == 0 ? currentQuestion = questions.Length - 1 : --currentQuestion]);     // skip this question
+                        }
+                    }
+                    SE[1].Play();
                 timeCount = 0;
             }
             else if (Input.GetButtonDown("Cancel"))  // move back to detect part
@@ -81,6 +105,7 @@ public class TalkSystemManager : MonoBehaviour
                     {
                         PlayerController.canMove = true;
                         talkSystem.SetActive(false);
+                        currentChosen = 0;
                     }
                     else {
                         closeQuestion();
@@ -102,19 +127,21 @@ public class TalkSystemManager : MonoBehaviour
                     {
                         Chara chara = charaList[currentChosen];
 
-                        //choose ques
+                        //choosen ques
                         if (currentQuestion == 0)   // normal talk
                         {
-                            dialogManager.showDialog(chara.talks.normalTalk[normalTime[currentChosen]].talks);
-                            if (normalTime[currentChosen] < chara.talks.normalTalk.Count - 1)
-                                normalTime[currentChosen]++;
+                            int id = normalTime[currentChosen];
+                            if(normalTime[currentChosen] >= chara.talks.normalTalk.Count)
+                                id = chara.talks.normalTalk.Count - 1;
+                            dialogManager.showDialog(chara.talks.normalTalk[id].talks);
+                            normalTime[currentChosen]++;
                         }
                         else if (currentQuestion == 1)  // alibi talk
                             dialogManager.showDialog(chara.talks.alibi);
                         else if (currentQuestion == 2)  // open itembox
-                        {
                             itemBoxUIManager.showItemBox();
-                        }       
+                        else if (currentQuestion == 3)
+                            dialogManager.showDialog(chara.talks.qa.answer);
                     }
             }
         } 

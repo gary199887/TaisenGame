@@ -31,11 +31,11 @@ public class StageDataIO : MonoBehaviour
 
         stageData = new Stage();
         stageData.itemList = new ItemList();
-        stageData.itemList.items.Add(new Item(0, "カメラ", "お店の写真や景色の写真などがたくさんある\n写真家が使っているものだ", new Vector3(8.16f, -1.13f, 0)));
-        stageData.itemList.items.Add(new Item(1, "花瓶", "スズランが挿さっていた\nスズランを挿すなんてどうかしてる", new Vector3(5.07f, -2.28f, 0)));
-        stageData.itemList.items.Add(new Item(2, "包丁", "きれいに保たれてるが、使い込まれているのが分かる", new Vector3(-2.29f, -1.78f, 0)));
-        stageData.itemList.items.Add(new Item(3, "ペン", "弁護士の使っているペン\n店に忘れていたそうだ。閉店作業をしていたウェイターが見つけた。", new Vector3(2.95f, -0.56f, 0)));
-        stageData.itemList.items.Add(new Item(4, "ナイフ", "高級感がある\n死体に刺さっていたものと同じ、食事用のナイフ", new Vector3(0.95f, -0.56f, 0)));
+        stageData.itemList.items.Add(new Item(0, "カメラ", "お店の写真や景色の写真などがたくさんある\n写真家が使っているものだ", new Vector3(-1.45f, -0.78f, 0)));
+        stageData.itemList.items.Add(new Item(1, "花瓶", "スズランが挿さっていた\nスズランを挿すなんてどうかしてる", new Vector3(4.236f, 0.0f, 0)));
+        stageData.itemList.items.Add(new Item(2, "包丁", "きれいに保たれてるが、使い込まれているのが分かる", new Vector3(7.76f, 0.0f, 0)));
+        stageData.itemList.items.Add(new Item(3, "ペン", "弁護士の使っているペン\n店に忘れていたそうだ。閉店作業をしていたウェイターが見つけた。", new Vector3(1.1f, -0.191f, 0)));
+        stageData.itemList.items.Add(new Item(4, "ナイフ", "高級感がある\n死体に刺さっていたものと同じ、食事用のナイフ", new Vector3(-4.1797f, -2.784f, 0)));
 
         stageData.charaList.Add(new Chara(0, "シェフ", "女", "オーナーとはビジネスパートナーであり、長い間一緒に仕事している。", "過去に経営でトラブルがあった。現在の経営は安定している。"));
         stageData.charaList.Add(new Chara(1, "ウェイター", "男", "真面目に働いていて周囲からはとても良い印象を抱かれている。", "真面目に働いているが実は働き方に不満がある。"));
@@ -57,6 +57,9 @@ public class StageDataIO : MonoBehaviour
             null,
             null
     };
+        currentTalk.qa.question = new string("ウェイターの証言について聞く");
+        currentTalk.qa.answer = new string[] { "自分じゃないよ", "言ったはずだ", "ずっと厨房にいたよ"};
+        currentTalk.qa.trigger = new Trigger(1, 2);
 
 
         stageData.charaList[0].setTalks(currentTalk);
@@ -65,8 +68,8 @@ public class StageDataIO : MonoBehaviour
         currentTalk = new Talk();
         currentTalk.normalTalk = new List<Talks> {
             new Talks(new string[] { "First Talk!", "I am waiter!", "Nice to meet you bro!" }),
-            new Talks(new string[] { "Uh...", "I ... am waiter", "that's all." })
-
+            new Talks(new string[] { "Uh...", "I ... am waiter", "that's all." }),
+            new Talks(new string[] {"そういえばシェフが犯人だと思います", "店のこと一番知ってる人だから"})
         };
         currentTalk.alibi = new string[] { "注文の提供やお客様の対応などの業務を行ってたよ。", "閉店から0時までは清掃などの閉店作業を1時間程度してたんだ。" };
         currentTalk.itemTalk = new List<Talks> {
@@ -76,6 +79,11 @@ public class StageDataIO : MonoBehaviour
             null,
             new Talks(new string[] { "うちが使ってるナイフは全部このタイプだよ", "特に何も変わったことがないね" })
         };
+
+        currentTalk.qa.question = new string("見つめる");
+        currentTalk.qa.answer = new string[] {"....FxxK! what's ur problem, man?", "Stop staring at me!"};
+        currentTalk.qa.trigger = new Trigger(1, 0);
+
         stageData.charaList[1].setTalks(currentTalk);
 
         // 3rd chara
@@ -92,24 +100,28 @@ public class StageDataIO : MonoBehaviour
             new Talks(new string[] { "自分が普段使っているペンですね。", "どこに落としたかと思ったらここだったですね。", "ウェーターさんが見つけてくれてよかったです。" }),
             null
         };
+
+        currentTalk.qa.question = new string("写真家の証言について聞く");
+        currentTalk.qa.answer = new string[] { "普通に注意しただけですよ", "オーナー本人になんの恨みもない", "そもそも恨めむほど親しい関係でもないですし。" };
+        currentTalk.qa.trigger = new Trigger(3, 2);
         stageData.charaList[2].talks = currentTalk;
 
-        foreach (var strarr in currentTalk.normalTalk) {
-            foreach (var str in strarr.talks) {
-                Debug.Log(str);
-            }
-        }
-        foreach (var strarr in currentTalk.itemTalk) {
-            try
-            {
-                foreach (var str in strarr.talks)
-                {
-                    Debug.Log(str);
-                }
-            } catch {
-                Debug.Log("null");
-            }
-        }
+        //foreach (var strarr in currentTalk.normalTalk) {
+        //    foreach (var str in strarr.talks) {
+        //        Debug.Log(str);
+        //    }
+        //}
+        //foreach (var strarr in currentTalk.itemTalk) {
+        //    try
+        //    {
+        //        foreach (var str in strarr.talks)
+        //        {
+        //            Debug.Log(str);
+        //        }
+        //    } catch {
+        //        Debug.Log("null");
+        //    }
+        //}
 
 
         // 4th chara
@@ -117,7 +129,8 @@ public class StageDataIO : MonoBehaviour
         currentTalk.normalTalk = new List<Talks> {
             new Talks(new string[] { "初めまして", "私は写真家", "よろしくね" }),
             new Talks(new string[] { "写真以外にも色々やってるよ", "この店に関わる仕事も一つ担当してるからよく来るよ" }),
-            new Talks(new string[] { "私のことはもういいかな" })
+            new Talks(new string[] { "弁護士はオーナーに対して不満があると思う", "スズランとかいつもオーナーにどうこう言ってるし", "正直迷惑だった" }),
+            new Talks(new string[] { "もう特に話すことはないかな"})
         };
         currentTalk.alibi = new string[] { "写真を撮ったりしながら帰宅していたら、オーナーの死体を見つけたのよ。", "死体にはお店のナイフが刺さっていたわ。" };
         currentTalk.itemTalk = new List<Talks> {
@@ -127,6 +140,12 @@ public class StageDataIO : MonoBehaviour
             null,
             null
         };
+
+        currentTalk.qa.question = new string("なにか聞く");
+        currentTalk.qa.answer = new string[] {"何かって?", "???", "......?????????"};
+        currentTalk.qa.trigger = new Trigger(3, 3);
+
+
         stageData.charaList[3].talks = currentTalk;
 
 
