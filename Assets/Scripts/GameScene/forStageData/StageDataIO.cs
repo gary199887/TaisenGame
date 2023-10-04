@@ -30,6 +30,15 @@ public class StageDataIO : MonoBehaviour
 
 
         stageData = new Stage();
+        Corpse corpse = new Corpse();
+        corpse.name = "オーナー";
+        corpse.gender = "男";
+        corpse.bodyInfo = "死体にナイフ、死亡推定時刻と血液の状態が少しあわない";
+        corpse.secret = "なんかオーナーの秘密";
+        corpse.relationShip = "オーナーの人間関係等";
+        stageData.corpse = corpse;
+
+
         stageData.itemList = new ItemList();
         stageData.itemList.items.Add(new Item(0, "カメラ", "お店の写真や景色の写真などがたくさんある\n写真家が使っているものだ", new Vector3(-1.45f, -0.78f, 0)));
         stageData.itemList.items.Add(new Item(1, "花瓶", "スズランが挿さっていた\nスズランを挿すなんてどうかしてる", new Vector3(4.236f, 0.0f, 0)));
@@ -157,7 +166,7 @@ public class StageDataIO : MonoBehaviour
         stageData.endTalks.Add("アリバイ：スズランの毒で死ぬまでの時間に写真を撮ることでアリバイを作った");
         stageData.endTalks.Add("凶器：ナイフでの殺害に見せかけるために死んだあとで刺した");
         stageData.endTalks.Add("クリアです\nZキー押してリザルトを確認");
-
+        StageManager.loadStage(100);
         StageManager.saveStage(stageData);
     }
 }

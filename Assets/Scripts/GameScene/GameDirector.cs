@@ -40,6 +40,7 @@ public class GameDirector : CommonFunctions
         stageData = StageManager.loadStage(stage);
         setItemList(stageData.itemList);
         setCharaList(stageData.charaList);
+        setCorpse(stageData.corpse);
         PlayerController.itemBox = new Item[stageData.itemList.items.Count];
         // create items with stage data
         foreach (Item item in stageData.itemList.items)
@@ -130,5 +131,10 @@ public class GameDirector : CommonFunctions
         string[] overHint = {"残念...ゲームオーバーだよ", "Zキーでタイトルへ戻る" };
         dialogManager.showDialog(overHint);
         gameOver = true;
+    }
+
+    // setCorpseInfo
+    public void setCorpse(Corpse corpse) {
+        CharaInfoUIManager.corpse = corpse;
     }
 }
