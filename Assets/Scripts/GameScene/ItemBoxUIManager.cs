@@ -12,8 +12,11 @@ public class ItemBoxUIManager : MonoBehaviour
     [SerializeField] public GameObject nullHint;
     [SerializeField] public Text itemName;
     [SerializeField] public Text itemDetail;
+    [SerializeField] Text listTitle;
     [SerializeField] public Canvas canvas;          // canvas as parent of item prefab
     [SerializeField] public TalkSystemManager talkSystemManager;
+    [SerializeField] CharaInfoUIManager charaInfoUIManager;
+    [SerializeField] GameObject zHint;
     List<GameObject> itemGameObjects;               // temporary gameObject list to destroy when itembox be closed
     List<Item> itemObjects;                         // item list attached to gameObject list to get the corresponding item detail
     int currentShowing;                             // current showing item index
@@ -37,7 +40,7 @@ public class ItemBoxUIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (itemBoxUI.activeSelf)
+        if (itemBoxUI.activeSelf && !CharaInfoUIManager.showingCharaInfo)
         {
             // can do some actions only if itemBox UI is active
             timeCount += Time.deltaTime;
@@ -58,14 +61,23 @@ public class ItemBoxUIManager : MonoBehaviour
                     //SE[1].Play();
                     timeCount = 0;
                 }
+
+                else if (Input.GetAxis("Horizontal") > 0.1 || Input.GetAxis("Horizontal") < -0.1) {
+                    if (!TalkSystemManager.choosingQuestion)
+                    {
+                        changeToCharaInfo();
+                        charaInfoUIManager.showCharaList();
+                    }
+                }
                 else if (Input.GetButtonDown("Cancel"))
                 {
-                    if(TalkSystemManager.choosingQuestion)
+                    if (TalkSystemManager.choosingQuestion)
                         talkSystemManager.startTalk(TalkSystemManager.currentChosen);
                     closeItemBox();
                 }
-                else if (Input.GetButton("Submit")) {
-                    if (itemObjects.Count > 0)
+                else if (Input.GetButton("Submit"))
+                {
+                    if (itemObjects.Count > 0 && TalkSystemManager.choosingQuestion)
                     {
                         talkSystemManager.showItemTalk(itemObjects[currentShowing].id);
                         closeItemBox();
@@ -77,6 +89,7 @@ public class ItemBoxUIManager : MonoBehaviour
 
     // called by other scripts to open itemBox UI
     public void showItemBox() {
+        listTitle.text = "アイテム情報";
         PlayerController.canMove = false;
         itemBoxUI.SetActive(true);
         int count = 0; // collected item num
@@ -101,10 +114,20 @@ public class ItemBoxUIManager : MonoBehaviour
             currentShowing = 0;
             showItem(currentShowing);
         }
+
+        // set if the hints be active
+        if (TalkSystemManager.choosingQuestion)
+        {
+            zHint.GetComponent<Text>().text = "Z　聞く";
+        }
+        else {
+            zHint.GetComponent<Text>().text = "←→　アイテム/人物情報";
+        }
     }
 
     // show item detail with index of temporary index
     void showItem(int id) {
+        timeCount = 0;
         itemGameObjects[id].GetComponent<Text>().color = Color.green;
         Item item = itemObjects[id];
         itemName.text = item.name;
@@ -112,7 +135,7 @@ public class ItemBoxUIManager : MonoBehaviour
     }
 
     // close itemBox UI
-    void closeItemBox() {
+    public void closeItemBox() {
         timeCount = 0;
         foreach (var itemGameObj in itemGameObjects) {
             // clear text UI gameObjects
@@ -126,5 +149,20 @@ public class ItemBoxUIManager : MonoBehaviour
         itemBoxUI.SetActive(false);
         if(!TalkSystemManager.choosingQuestion)
         PlayerController.canMove = true;
+    }
+
+    void changeToCharaInfo() {
+        timeCount = 0;
+        foreach (var itemGameObj in itemGameObjects)
+        {
+            // clear text UI gameObjects
+            Destroy(itemGameObj);
+        }
+        itemGameObjects.Clear();
+        itemObjects.Clear();
+        itemName.text = "";
+        itemDetail.text = "";
+        nullHint.SetActive(false);
+        
     }
 }
