@@ -25,3 +25,21 @@ public class Chara
         talks = talk;
     }
 }
+
+[Serializable]
+public class Corpse {
+    public string name;
+    public string bodyInfo;
+    public string gender;
+    public string secret;
+    public string relationShip;
+
+    public Corpse() { }
+    public Corpse(string name, string gender, string bodyInfo, string secret, string relationShip) {
+        this.name = name;
+        this.gender = gender;
+        this.bodyInfo = bodyInfo;
+        this.secret = secret;
+        this.relationShip = relationShip;
+    }
+}
