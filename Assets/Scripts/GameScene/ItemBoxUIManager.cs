@@ -16,7 +16,9 @@ public class ItemBoxUIManager : MonoBehaviour
     [SerializeField] public Canvas canvas;          // canvas as parent of item prefab
     [SerializeField] public TalkSystemManager talkSystemManager;
     [SerializeField] CharaInfoUIManager charaInfoUIManager;
-    [SerializeField] GameObject zHint;
+    [SerializeField] Text zHint;
+    [SerializeField] Text xHint;
+    [SerializeField] SEPlayer sePlayer;
     List<GameObject> itemGameObjects;               // temporary gameObject list to destroy when itembox be closed
     List<Item> itemObjects;                         // item list attached to gameObject list to get the corresponding item detail
     int currentShowing;                             // current showing item index
@@ -51,14 +53,14 @@ public class ItemBoxUIManager : MonoBehaviour
                 {
                     itemGameObjects[currentShowing].GetComponent<Text>().color = Color.white;
                     showItem(currentShowing == itemGameObjects.Count - 1 ? currentShowing = 0 : ++currentShowing);
-                    //SE[1].Play();
+                    sePlayer.playClickSE();
                     timeCount = 0;  // clear counter when whatever actions had been taken
                 }
                 else if (Input.GetAxis("Vertical") > 0.1 && itemGameObjects.Count != 0)
                 {
                     itemGameObjects[currentShowing].GetComponent<Text>().color = Color.white;
                     showItem(currentShowing == 0 ? currentShowing = itemGameObjects.Count - 1 : --currentShowing);
-                    //SE[1].Play();
+                    sePlayer.playClickSE();
                     timeCount = 0;
                 }
 
@@ -73,6 +75,7 @@ public class ItemBoxUIManager : MonoBehaviour
                 {
                     if (TalkSystemManager.choosingQuestion)
                         talkSystemManager.startTalk(TalkSystemManager.currentChosen);
+                    sePlayer.playCancelSE();
                     closeItemBox();
                 }
                 else if (Input.GetButton("Submit"))
@@ -118,10 +121,12 @@ public class ItemBoxUIManager : MonoBehaviour
         // set if the hints be active
         if (TalkSystemManager.choosingQuestion)
         {
-            zHint.GetComponent<Text>().text = "Z　聞く";
+            zHint.text = "Z　聞く";
+            xHint.text = "X　閉じる";
         }
         else {
-            zHint.GetComponent<Text>().text = "←→　アイテム/人物情報";
+            zHint.text = "←→　アイテム/人物情報";
+            xHint.text = "   X　閉じる";
         }
     }
 
@@ -137,6 +142,7 @@ public class ItemBoxUIManager : MonoBehaviour
     // close itemBox UI
     public void closeItemBox() {
         timeCount = 0;
+
         foreach (var itemGameObj in itemGameObjects) {
             // clear text UI gameObjects
             Destroy(itemGameObj);
@@ -153,6 +159,7 @@ public class ItemBoxUIManager : MonoBehaviour
 
     void changeToCharaInfo() {
         timeCount = 0;
+        sePlayer.playSelectionChangedSE();
         foreach (var itemGameObj in itemGameObjects)
         {
             // clear text UI gameObjects
