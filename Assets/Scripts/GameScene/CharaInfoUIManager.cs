@@ -10,6 +10,7 @@ public class CharaInfoUIManager : MonoBehaviour
     [SerializeField] ItemBoxUIManager itemBoxUIManager;
     [SerializeField] Canvas canvas;          // canvas as parent of item prefab
     [SerializeField] Text title;
+    [SerializeField] SEPlayer sePlayer;
     public static Corpse corpse;
     public static bool showingCharaInfo;
     Vector3 firstPosition;
@@ -65,26 +66,28 @@ public class CharaInfoUIManager : MonoBehaviour
                 {
                     charaGameObjects[currentShowing].GetComponent<Text>().color = Color.white;
                     showChara(currentShowing == charaGameObjects.Count - 1 ? currentShowing = 0 : ++currentShowing);
-                    //SE[1].Play();
+                    sePlayer.playClickSE();
                     timeCount = 0;  // clear counter when whatever actions had been taken
                 }
                 else if (Input.GetAxis("Vertical") > 0.1 && charaGameObjects.Count != 0)
                 {
                     charaGameObjects[currentShowing].GetComponent<Text>().color = Color.white;
                     showChara(currentShowing == 0 ? currentShowing = charaGameObjects.Count - 1 : --currentShowing);
-                    //SE[1].Play();
+                    sePlayer.playClickSE();
                     timeCount = 0;
                 }
 
                 else if (Input.GetAxis("Horizontal") > 0.1 || Input.GetAxis("Horizontal") < -0.1)
                 {
                     closeCharaList();
+                    sePlayer.playSelectionChangedSE();
                     itemBoxUIManager.showItemBox();
                 }
 
                 else if (Input.GetButtonDown("Cancel"))
                 {
                     closeCharaList();
+                    sePlayer.playCancelSE();
                     itemBoxUIManager.closeItemBox();
                 }
                 //else if (Input.GetButton("Submit"))
@@ -112,10 +115,10 @@ public class CharaInfoUIManager : MonoBehaviour
         if (id < charaGameObjects.Count - 1)
         {
             Chara chara = TalkSystemManager.charaList[id];
-            charaDetail.text = $"{chara.name}\n«•Ê:{chara.gender}\n\nlŠÔŠÖŒW:{chara.relationShip}\n\n”é–§:{chara.secret}";
+            charaDetail.text = $"{chara.name}\n«•Ê:{chara.gender}\n\nlŠÔŠÖŒW:\n{chara.relationShip}\n\n”é–§:\n{chara.secret}";
         }
         else {
-            charaDetail.text = $"{corpse.name}(Ž€–S)\n«•Ê:{corpse.gender}\n\nŽ€‘Ìó‹µ:{corpse.bodyInfo}\n\nŒÂlî•ñ:{corpse.relationShip}{corpse.secret}";
+            charaDetail.text = $"{corpse.name}(Ž€–S)\n«•Ê:{corpse.gender}\n\nŽ€‘Ìó‹µ:\n{corpse.bodyInfo}\n\nŒÂlî•ñ:\n{corpse.relationShip}{corpse.secret}";
         }
     }
 
