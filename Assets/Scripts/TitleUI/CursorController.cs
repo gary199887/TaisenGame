@@ -24,19 +24,18 @@ public class CursorController : MonoBehaviour
         image.transform.position = trfm[0].position;
         image.DOFade(0, duration).SetLoops(-1, LoopType.Yoyo).SetEase(ease).SetLink(gameObject);
 
+        StageChangeButton.OnChangeStage += () => { image.DOKill(true); };
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(StageChangeButton.stageChange)
-        {
-            image.DOKill(true);
-        }
         move();
         check();
     }
+
+
 
     Button button;
     private void OnTriggerEnter2D(Collider2D collision)
