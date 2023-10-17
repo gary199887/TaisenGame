@@ -57,7 +57,7 @@
           ],
           "trigger": {
             "charaId": 2,
-            "normalTimes": 0
+            "normalTimes": 1
           }
         }
       }
@@ -111,7 +111,7 @@
           ],
           "trigger": {
             "charaId": 2,
-            "normalTimes": 0
+            "normalTimes": 1
           }
         }
       }
@@ -165,7 +165,7 @@
           ],
           "trigger": {
             "charaId": 0,
-            "normalTimes": 0
+            "normalTimes": 1
           }
         }
       }
