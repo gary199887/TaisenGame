@@ -3517,6 +3517,7 @@ MonoBehaviour:
   SE:
   - {fileID: 836025189}
   - {fileID: 300558326}
+  - {fileID: 374129620}
   charaImage: {fileID: 1681334236}
   charaSprites:
   - {fileID: 21300000, guid: 0ee635bb4a588be4ca771c6fbe13c2b6, type: 3}

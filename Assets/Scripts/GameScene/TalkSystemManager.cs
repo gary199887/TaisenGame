@@ -20,7 +20,7 @@ public class TalkSystemManager : MonoBehaviour
     int[] normalTime;                       // times to talk with charas, index->charaId
     [SerializeField] public GameObject questionUI;
     [SerializeField] public Text questionText;
-    [SerializeField] AudioSource[] SE;       // 0: cancel, 1: change selection
+    [SerializeField] AudioSource[] SE;       // 0: cancel, 1: change selection  2:confirm
     [SerializeField] SpriteRenderer charaImage;
     [SerializeField] Sprite[] charaSprites;
     [SerializeField] public ItemBoxUIManager itemBoxUIManager;
@@ -118,31 +118,31 @@ public class TalkSystemManager : MonoBehaviour
             else if (Input.GetButtonDown("Submit"))  // talk with chosen charactor
             {
                 timeCount = 0;
-                    if (!choosingQuestion)
+                if (!choosingQuestion)
+                {
+                    choosingQuestion = true;
+                    showQuestion(questions[currentQuestion]);
+                    SE[2].Play();
+                }
+                else
+                {
+                    Chara chara = charaList[currentChosen];
+                    //choosen ques
+                    if (currentQuestion == 0)   // normal talk
                     {
-                        choosingQuestion = true;
-                        showQuestion(questions[currentQuestion]);
+                        int id = normalTime[currentChosen];
+                        if(normalTime[currentChosen] >= chara.talks.normalTalk.Count)
+                            id = chara.talks.normalTalk.Count - 1;
+                        dialogManager.showDialog(chara.talks.normalTalk[id].talks);
+                        normalTime[currentChosen]++;
                     }
-                    else
-                    {
-                        Chara chara = charaList[currentChosen];
-
-                        //choosen ques
-                        if (currentQuestion == 0)   // normal talk
-                        {
-                            int id = normalTime[currentChosen];
-                            if(normalTime[currentChosen] >= chara.talks.normalTalk.Count)
-                                id = chara.talks.normalTalk.Count - 1;
-                            dialogManager.showDialog(chara.talks.normalTalk[id].talks);
-                            normalTime[currentChosen]++;
-                        }
-                        else if (currentQuestion == 1)  // alibi talk
-                            dialogManager.showDialog(chara.talks.alibi);
-                        else if (currentQuestion == 2)  // open itembox
-                            itemBoxUIManager.showItemBox();
-                        else if (currentQuestion == 3)
-                            dialogManager.showDialog(chara.talks.qa.answer);
-                    }
+                    else if (currentQuestion == 1)  // alibi talk
+                        dialogManager.showDialog(chara.talks.alibi);
+                    else if (currentQuestion == 2)  // open itembox
+                        itemBoxUIManager.showItemBox();
+                    else if (currentQuestion == 3)
+                        dialogManager.showDialog(chara.talks.qa.answer);
+                }
             }
         } 
     }
