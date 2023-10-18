@@ -90,13 +90,6 @@ public class CharaInfoUIManager : MonoBehaviour
                     sePlayer.playCancelSE();
                     itemBoxUIManager.closeItemBox();
                 }
-                //else if (Input.GetButton("Submit"))
-                //{
-                //    if (chObjects.Count > 0)
-                //    {
-               
-                //    }
-                //}
             }
         }
     }

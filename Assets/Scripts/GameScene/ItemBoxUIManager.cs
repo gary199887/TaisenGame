@@ -19,6 +19,7 @@ public class ItemBoxUIManager : MonoBehaviour
     [SerializeField] Text zHint;
     [SerializeField] Text xHint;
     [SerializeField] SEPlayer sePlayer;
+    [SerializeField] GameObject playTimeUI;
     List<GameObject> itemGameObjects;               // temporary gameObject list to destroy when itembox be closed
     List<Item> itemObjects;                         // item list attached to gameObject list to get the corresponding item detail
     int currentShowing;                             // current showing item index
@@ -95,6 +96,8 @@ public class ItemBoxUIManager : MonoBehaviour
         listTitle.text = "ÉAÉCÉeÉÄèÓïÒ";
         PlayerController.canMove = false;
         itemBoxUI.SetActive(true);
+        // not to reveal playTime UI when player is asking about items
+        playTimeUI.SetActive(!TalkSystemManager.choosingQuestion);
         int count = 0; // collected item num
         // check items in itemBox
         foreach (var item in PlayerController.itemBox)

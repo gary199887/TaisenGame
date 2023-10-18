@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioSource clickSE;
     [SerializeField] AudioSource getItemSE;
     public static Item[] itemBox;
+    Vector3 maxScreen;
+    Vector3 minScreen;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,8 @@ public class PlayerController : MonoBehaviour
         speed = 10.0f;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        maxScreen = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 0));
+        minScreen = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0));
     }
 
     // Update is called once per frame
@@ -27,7 +31,22 @@ public class PlayerController : MonoBehaviour
     {
         if (!canMove) return;
         Vector3 inputDirection = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-        transform.Translate(inputDirection * speed * Time.deltaTime);
+
+        if (inputDirection != Vector3.zero)
+        {
+            Bounds bounds = GetComponent<SpriteRenderer>().bounds;
+            if ((bounds.max + inputDirection - bounds.size).x >= maxScreen.x || (bounds.min + inputDirection + bounds.size).x <= minScreen.x)
+            {
+                inputDirection.x = 0;
+            }
+
+            if ((bounds.max + inputDirection - bounds.size).y >= maxScreen.y || (bounds.min + inputDirection + bounds.size).y <= minScreen.y)
+            {
+                inputDirection.y = 0;
+            }
+            
+            transform.Translate(inputDirection * speed * Time.deltaTime);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
