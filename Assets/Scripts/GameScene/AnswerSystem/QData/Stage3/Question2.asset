@@ -16,6 +16,7 @@ MonoBehaviour:
   qSentence: "\u6BBA\u5BB3\u306B\u4F7F\u3063\u305F\u3082\u306E\u306F\uFF1F"
   selectAnswer:
   - "\u4E03\u8F2A"
-  - "\u3072\u3082"
+  - "\u30ED\u30FC\u30D7"
   - "\u30BF\u30AA\u30EB"
+  - "\u9769\u306E\u624B\u888B"
   correctAnswer: "\u4E03\u8F2A"
