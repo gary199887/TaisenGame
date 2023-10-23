@@ -3618,6 +3618,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog: {fileID: 746636994}
   dialogText: {fileID: 81014070}
+  gameDirector: {fileID: 707816977}
 --- !u!82 &1267644732
 AudioSource:
   m_ObjectHideFlags: 0
