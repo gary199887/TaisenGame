@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameDirector : CommonFunctions
 {
     // current data
-    public static int stage = 2;
+    public static int stage = 1;
     public static float gameTime;
     public static string playerName;
 
@@ -14,6 +14,7 @@ public class GameDirector : CommonFunctions
     public static bool gameClear;
     public static bool gamePause;
     public static bool gameOver;
+    public static bool gameStarted;
     
     // stage data
     static Stage stageData;
@@ -32,6 +33,7 @@ public class GameDirector : CommonFunctions
         gameClear = false;
         gamePause = false;
         gameOver = false;
+        gameStarted = false;
         gameTime = 0;
         playerName = "Unknown";
 
@@ -52,6 +54,8 @@ public class GameDirector : CommonFunctions
         // set background image and music depends on current stage number
         backGround.GetComponent<SpriteRenderer>().sprite = backGroundImages[stage - 1];
         BGM[stage - 1].Play();
+
+       
     }
 
     // Update is called once per frame
@@ -136,5 +140,16 @@ public class GameDirector : CommonFunctions
     // setCorpseInfo
     public void setCorpse(Corpse corpse) {
         CharaInfoUIManager.corpse = corpse;
+    }
+
+    // start game talk
+    public void startGameTalk() {
+        string[] startTalks = stageData.startTalks.ToArray();
+        dialogManager.showDialog(startTalks);
+        PlayerController.canMove = false;
+    }
+
+    public void gameStart() {
+        gameStarted = true;
     }
 }
