@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using TMPro;
 
 public class CursorController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class CursorController : MonoBehaviour
     Image image;
     int index;
 
+    bool isInput;
     CanvasGroup mycanvasGroup;
 
     // Start is called before the first frame update
@@ -21,6 +23,7 @@ public class CursorController : MonoBehaviour
         image = GetComponent<Image>();
         mycanvasGroup = gameObject.transform.parent.GetComponent<CanvasGroup>();
         index = 0;
+        isInput = true;
         image.transform.position = trfm[0].position;
         image.DOFade(0, duration).SetLoops(-1, LoopType.Yoyo).SetEase(ease).SetLink(gameObject);
 
@@ -47,37 +50,33 @@ public class CursorController : MonoBehaviour
     }
 
 
-
     void move()
     {
 
-        float input = 0;
+        float input= Input.GetAxisRaw("Horizontal");//“ü—Í‚ÌŽæ“¾
         
-        //‰¡ƒ{ƒ^ƒ“—LŒø
-        if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow))
+        if (input > 0&&isInput)
         {
-            input = 1;
-        }
-        if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            input = -1;
-        }
-
-        if (input > 0)
-        {
+            isInput = false;
             if (trfm.Length > index + 1)
             {
                 index++;
                 image.transform.position = trfm[index].position;
             }
         }
-        if (input < 0)
+        if (input < 0&&isInput)
         {
+            isInput = false;
             if (0 <= index - 1)
             {
                 index--;
                 image.transform.position = trfm[index].position;
             }
+        }
+
+        if(input==0)
+        {
+            isInput = true;
         }
     }
 
