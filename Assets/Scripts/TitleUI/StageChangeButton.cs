@@ -16,6 +16,7 @@ public class StageChangeButton : MonoBehaviour,Button
     AudioSource audioSource;
 
     public static bool stageChange { get; private set; }
+    public static event System.Action OnChangeStage;
 
     private void Awake()
     {
@@ -36,6 +37,7 @@ public class StageChangeButton : MonoBehaviour,Button
     void InvokeExecute()
     {
         stageChange = true;
+        OnChangeStage();
         GameDirector.stage = stageNum;
         SceneManager.LoadScene("GameScene");
     }
