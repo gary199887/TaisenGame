@@ -61,10 +61,13 @@ public class GameDirector : CommonFunctions
     // Update is called once per frame
     void Update()
     {
-        if(!gameClear)
-            gameTime += Time.deltaTime;
+        if (!gameClear)
+        {
+            if(gameStarted)
+                gameTime += Time.deltaTime;
+        }
         else
-            if(!dialogManager.dialog.activeSelf)
+            if (!dialogManager.dialog.activeSelf)
             SceneManager.LoadScene("ResultScene");
 
         // back to detective part if there is a wrong answer
