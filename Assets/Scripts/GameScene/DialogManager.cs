@@ -77,6 +77,7 @@ public class DialogManager : MonoBehaviour
                     {
                         gameDirector.gameStart();
                         PlayerController.canMove = true;
+                        gameDirector.initItems();   // initialize items after start talk ended
                     }
                 }
 

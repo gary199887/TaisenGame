@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameDirector : CommonFunctions
 {
     // current data
-    public static int stage = 1;
+    public static int stage = 2;
     public static float gameTime;
     public static string playerName;
 
@@ -44,12 +44,12 @@ public class GameDirector : CommonFunctions
         setCharaList(stageData.charaList);
         setCorpse(stageData.corpse);
         PlayerController.itemBox = new Item[stageData.itemList.items.Count];
-        // create items with stage data
-        foreach (Item item in stageData.itemList.items)
-        {
-            GameObject createItem = Instantiate(itemPrefab, item.pos, Quaternion.identity);
-            createItem.name = $"Item_{item.id}";
-        }
+        //// create items with stage data
+        //foreach (Item item in stageData.itemList.items)
+        //{
+        //    GameObject createItem = Instantiate(itemPrefab, item.pos, Quaternion.identity);
+        //    createItem.name = $"Item_{item.id}";
+        //}
 
         // set background image and music depends on current stage number
         backGround.GetComponent<SpriteRenderer>().sprite = backGroundImages[stage - 1];
@@ -154,5 +154,15 @@ public class GameDirector : CommonFunctions
 
     public void gameStart() {
         gameStarted = true;
+    }
+
+    public void initItems()
+    {
+        // create items with stage data
+        foreach (Item item in stageData.itemList.items)
+        {
+            GameObject createItem = Instantiate(itemPrefab, item.pos, Quaternion.identity);
+            createItem.name = $"Item_{item.id}";
+        }
     }
 }
