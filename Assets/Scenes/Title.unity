@@ -2100,7 +2100,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 487366322}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -2162,7 +2162,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6f3e60cd00388454db0a0cc2c42a70a6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 99f848d9331d6be41a67f406765e7e02, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2251,7 +2251,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u3042\u308B\u30A2\u30D1\u30FC\u30C8\u3067\u7537\u304C\u6B7B\u4F53\u3067\u767A\u898B\u3055\u308C\u305F\u3002\u6B7B\u4F53\u306F\u7537\u306E\u81EA\u5BA4\u3067\u767A\u898B\u3055\u308C\u305F\u3002\n\u5BB9\u7591\u8005\u306F\u30A2\u30D1\u30FC\u30C8\u306E\u5927\u5BB6\u3001\u540C\u5C45\u4EBA\u3001\u96A3\u4EBA\u3001\u53CB\u4EBA\u306E4\u4EBA\u3002\n4\u4EBA\u306E\u3046\u3061\u8AB0\u304C\u72AF\u4EBA\u306A\u306E\u304B\u4E8B\u4EF6\u3092\u89E3\u6C7A\u3057\u3088\u3046\u3002\r"
+  m_Text: "\u3042\u308B\u65E5\u306E\u5915\u3001\u8FD1\u8FBA\u306B\u306F\u516C\u5712\u306A\u3069\u304C\u3042\u308B\u968E\u6BB5\u4ED8\u8FD1\u3067\n\u7537\u6027\u304C\u907A\u4F53\u3068\u306A\u3063\u3066\u767A\u898B\u3055\u308C\u305F\u3002\n\u671D\u3001\u96E8\u304C\u964D\u3063\u3066\u3044\u305F\u3053\u3068\u3082\u3042\u308A\u3001\u3069\u3046\u3084\u3089\u4E8B\u6545\u6B7B\u306E\u3088\u3046\u306B\u898B\u3048\u308B\u304C\u30FB\u30FB\u30FB\uFF1F\n\u63A8\u7406\u3067\u771F\u76F8\u3092\u7A81\u304D\u6B62\u3081\u3088\u3046\u3002"
 --- !u!222 &534056235
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2567,7 +2567,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30A2\u30D1\u30FC\u30C8\u4E8B\u4EF6"
+  m_Text: "\u968E\u6BB5\u4E8B\u4EF6"
 --- !u!222 &596945216
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3089,7 +3089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fce0dd1a3a83024c941933495065109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageNum: 2
+  stageNum: 4
   audioClip: {fileID: 8300000, guid: f783870fb86e94846867f11426836f80, type: 3}
   audioSource: {fileID: 957478154}
 --- !u!61 &798940144
@@ -4536,7 +4536,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1116266772
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4552,8 +4552,8 @@ RectTransform:
   - {fileID: 488437275}
   - {fileID: 596945214}
   - {fileID: 534056233}
-  - {fileID: 1550874486}
   - {fileID: 2145936038}
+  - {fileID: 1550874486}
   - {fileID: 86496993}
   m_Father: {fileID: 668056926}
   m_RootOrder: -1
@@ -4571,7 +4571,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1116266771}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -4807,7 +4807,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1353243331
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5203,7 +5203,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1444215614
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5617,7 +5617,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1532022035
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5706,7 +5706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   now: {fileID: 1116266773}
-  next: {fileID: 1275903053}
+  next: {fileID: 1353243332}
   duration: 0.6
   nowCvGp: 14
   nextCvGp: 15
@@ -7781,7 +7781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fce0dd1a3a83024c941933495065109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageNum: 3
+  stageNum: 5
   audioClip: {fileID: 8300000, guid: f783870fb86e94846867f11426836f80, type: 3}
   audioSource: {fileID: 957478154}
 --- !u!61 &2145936040
