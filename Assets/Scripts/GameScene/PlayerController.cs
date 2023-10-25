@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        canMove = true;
+        canMove = false;
         speed = 10.0f;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
