@@ -2051,11 +2051,15 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6d815e90080024c48b87d8b9f5387d8a, type: 3}
   - {fileID: 21300000, guid: 18348c87338b3b9409eaffff62f0d728, type: 3}
   - {fileID: 21300000, guid: 6f3e60cd00388454db0a0cc2c42a70a6, type: 3}
+  - {fileID: 21300000, guid: 3ad09c4f264c7db4685132a6cc333f0e, type: 3}
+  - {fileID: 21300000, guid: 99f848d9331d6be41a67f406765e7e02, type: 3}
   backGround: {fileID: 70754149}
   itemPrefab: {fileID: 6297469067418959944, guid: c676b755234145a4d9e7c20213563ef7, type: 3}
   BGM:
   - {fileID: 1666720259}
   - {fileID: 908785335}
+  - {fileID: 1942081497}
+  - {fileID: 1942081497}
   - {fileID: 1942081497}
 --- !u!1 &734295660
 GameObject:
@@ -2171,6 +2175,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 07d64089809812a44a5acd30ddd7f064, type: 2}
   - {fileID: 11400000, guid: 0c2859c41c91e6544a75780e180ed9fc, type: 2}
   - {fileID: 11400000, guid: fdd287de25a06924aa51775247316e8c, type: 2}
+  - {fileID: 11400000, guid: 08498e3fa48a5b0498212439299fa896, type: 2}
+  - {fileID: 11400000, guid: f2a8bb507bc9c4440b700dea4926f2ab, type: 2}
   questionText:
   - {fileID: 1661452416}
   - {fileID: 2108859285}
