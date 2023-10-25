@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameDirector : CommonFunctions
 {
     // current data
-    public static int stage = 2;
+    public static int stage = 5;
     public static float gameTime;
     public static string playerName;
 
