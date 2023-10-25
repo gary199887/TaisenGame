@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-            animator.SetTrigger("ExitItem");
-            spriteRenderer.color = Color.white;   
+        animator.SetTrigger("ExitItem");
+        spriteRenderer.color = Color.white;   
     }
 }
