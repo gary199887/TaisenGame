@@ -14,6 +14,7 @@ public class GameDirector : CommonFunctions
     public static bool gameClear;
     public static bool gamePause;
     public static bool gameOver;
+    public static bool gameStarted;
     
     // stage data
     static Stage stageData;
@@ -32,32 +33,41 @@ public class GameDirector : CommonFunctions
         gameClear = false;
         gamePause = false;
         gameOver = false;
+        gameStarted = false;
         gameTime = 0;
         playerName = "Unknown";
+
 
         // load stage data up to current stage number
         stageData = StageManager.loadStage(stage);
         setItemList(stageData.itemList);
         setCharaList(stageData.charaList);
-        // create items with stage data
-        foreach (Item item in stageData.itemList.items)
-        {
-            GameObject createItem = Instantiate(itemPrefab, item.pos, Quaternion.identity);
-            createItem.name = $"Item_{item.id}";
-        }
+        setCorpse(stageData.corpse);
+        PlayerController.itemBox = new Item[stageData.itemList.items.Count];
+        //// create items with stage data
+        //foreach (Item item in stageData.itemList.items)
+        //{
+        //    GameObject createItem = Instantiate(itemPrefab, item.pos, Quaternion.identity);
+        //    createItem.name = $"Item_{item.id}";
+        //}
 
         // set background image and music depends on current stage number
         backGround.GetComponent<SpriteRenderer>().sprite = backGroundImages[stage - 1];
         BGM[stage - 1].Play();
+
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!gameClear)
-            gameTime += Time.deltaTime;
+        if (!gameClear)
+        {
+            if(gameStarted)
+                gameTime += Time.deltaTime;
+        }
         else
-            if(!dialogManager.dialog.activeSelf)
+            if (!dialogManager.dialog.activeSelf)
             SceneManager.LoadScene("ResultScene");
 
         // back to detective part if there is a wrong answer
@@ -81,7 +91,7 @@ public class GameDirector : CommonFunctions
     // turning time(sec) float into string in format "mm:ss"
     public static string getTimeString(float time)
     {
-        return $"{(int)(time / 60):00}:{time % 60:00}";
+        return $"{(int)(Mathf.Round(time) / 60):00}:{Mathf.Round(time) % 60:00}";
     }
 
     // initialize itemlist after loading data at the beginning of the game
@@ -128,5 +138,31 @@ public class GameDirector : CommonFunctions
         string[] overHint = {"残念...ゲームオーバーだよ", "Zキーでタイトルへ戻る" };
         dialogManager.showDialog(overHint);
         gameOver = true;
+    }
+
+    // setCorpseInfo
+    public void setCorpse(Corpse corpse) {
+        CharaInfoUIManager.corpse = corpse;
+    }
+
+    // start game talk
+    public void startGameTalk() {
+        string[] startTalks = stageData.startTalks.ToArray();
+        dialogManager.showDialog(startTalks);
+        PlayerController.canMove = false;
+    }
+
+    public void gameStart() {
+        gameStarted = true;
+    }
+
+    public void initItems()
+    {
+        // create items with stage data
+        foreach (Item item in stageData.itemList.items)
+        {
+            GameObject createItem = Instantiate(itemPrefab, item.pos, Quaternion.identity);
+            createItem.name = $"Item_{item.id}";
+        }
     }
 }

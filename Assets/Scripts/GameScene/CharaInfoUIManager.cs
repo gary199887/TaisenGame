@@ -11,7 +11,11 @@ public class CharaInfoUIManager : MonoBehaviour
     [SerializeField] Canvas canvas;          // canvas as parent of item prefab
     [SerializeField] Text title;
     [SerializeField] SEPlayer sePlayer;
+<<<<<<< HEAD
     //public static Corpse corpse;
+=======
+    public static Corpse corpse;
+>>>>>>> aaa410a20c9627c3f5877b99e69c513b803eb18e
     public static bool showingCharaInfo;
     Vector3 firstPosition;
     List<GameObject> charaGameObjects;

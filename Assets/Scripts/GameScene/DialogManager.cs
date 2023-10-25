@@ -16,6 +16,7 @@ public class DialogManager : MonoBehaviour
     string[] talks;         // several sentences of the chosen charactor
     int currentIndex;       // current sentence id
     bool skipped;           // used to check if the single sentence has been skipped of not
+    [SerializeField] GameDirector gameDirector;
 
 
     private void Start()
@@ -25,6 +26,12 @@ public class DialogManager : MonoBehaviour
         dialog.SetActive(false);
         currentIndex = 0;
         skipped = false;
+
+        // startGame Talk here due to order of script executed
+        if (!GameDirector.gameStarted)
+        {
+            gameDirector.startGameTalk();
+        }
     }
 
     private void Update()
@@ -66,6 +73,12 @@ public class DialogManager : MonoBehaviour
                     timeCount = 0;
                     currentIndex = 0;
                     dialog.SetActive(false);
+                    if (!GameDirector.gameStarted)
+                    {
+                        gameDirector.gameStart();
+                        PlayerController.canMove = true;
+                        gameDirector.initItems();   // initialize items after start talk ended
+                    }
                 }
 
                 // skip word counting and just show the full sentence
