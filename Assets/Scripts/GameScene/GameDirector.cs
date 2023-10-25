@@ -29,6 +29,7 @@ public class GameDirector : CommonFunctions
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log(stage);
         // initialize status and data
         gameClear = false;
         gamePause = false;

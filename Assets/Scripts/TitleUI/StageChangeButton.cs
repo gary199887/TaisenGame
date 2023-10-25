@@ -22,7 +22,6 @@ public class StageChangeButton : MonoBehaviour,Button
     {
         stageChange = false;
     }
-
     public void onClicked()
     {
         audioSource.clip = audioClip;
